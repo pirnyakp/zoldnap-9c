@@ -1,248 +1,786 @@
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A 9.C osztály oldala a digitális megoldásokról és a fenntartható életről.">
-  <script>try{var t=localStorage.getItem("theme");if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = t;
+    } catch(e) {}
+  </script>
   <title>9.C | Digitális megoldások a fenntartható életért</title>
   <style>
     :root {
-      --green: #176b45;
-      --green-dark: #104b34;
-      --mint: #e8f5ed;
-      --lime: #b9e4a5;
-      --ink: #183329;
-      --muted: #5e7167;
-      --white: #fff;
-      --shadow: 0 14px 38px rgba(20, 70, 46, .10);
+      --green:#176b45;
+      --green-dark:#104b34;
+      --mint:#e8f5ed;
+      --lime:#b9e4a5;
+      --ink:#183329;
+      --muted:#5e7167;
+      --white:#fff;
+      --shadow:0 14px 38px rgba(20,70,46,.10);
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      margin: 0; font-family: Inter, "Segoe UI", Arial, sans-serif;
-      color: var(--ink); background: #f8fbf8; line-height: 1.65;
+      margin:0;
+      font-family:Inter,"Segoe UI",Arial,sans-serif;
+      color:var(--ink);
+      background:#f8fbf8;
+      line-height:1.65;
     }
-    a { color: inherit; }
+    a { color:inherit; }
     header {
-      position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94);
-      backdrop-filter: blur(12px); border-bottom: 1px solid #e5eee7;
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid #e5eee7;
     }
     .nav {
-      max-width: 1120px; margin: auto; padding: 14px 22px;
-      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      max-width:1120px;
+      margin:auto;
+      padding:14px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
     }
-    .brand { display:flex; align-items:center; gap:10px; font-weight:800; color:var(--green-dark); text-decoration:none; }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      color:var(--green-dark);
+      text-decoration:none;
+    }
     .brand-mark {
-      width: 38px; height: 38px; display:grid; place-items:center; border-radius:12px;
-      color:white; background:var(--green); font-size:20px;
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      color:white;
+      background:var(--green);
+      font-size:20px;
     }
-    nav { display:flex; gap:7px; flex-wrap:wrap; justify-content:flex-end; }
-    nav a { text-decoration:none; font-size:.91rem; font-weight:650; padding:8px 11px; border-radius:9px; }
-    nav a:hover, nav a:focus { background:var(--mint); color:var(--green-dark); }
+    nav {
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a {
+      text-decoration:none;
+      font-size:.91rem;
+      font-weight:650;
+      padding:8px 11px;
+      border-radius:9px;
+    }
+    nav a:hover,nav a:focus {
+      background:var(--mint);
+      color:var(--green-dark);
+    }
     .hero {
-      overflow:hidden; position:relative; color:white;
-      background: radial-gradient(circle at 82% 18%, rgba(185,228,165,.35), transparent 25%),
-                  linear-gradient(125deg, #104b34, #19764d 62%, #4b9a62);
+      overflow:hidden;
+      position:relative;
+      color:white;
+      background:
+        radial-gradient(circle at 82% 18%,rgba(185,228,165,.35),transparent 25%),
+        linear-gradient(125deg,#104b34,#19764d 62%,#4b9a62);
     }
     .hero-inner {
-      max-width:1120px; margin:auto; padding:92px 22px 100px;
-      display:grid; grid-template-columns:1.3fr .7fr; align-items:center; gap:45px;
+      max-width:1120px;
+      margin:auto;
+      padding:92px 22px 100px;
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      align-items:center;
+      gap:45px;
     }
-    .eyebrow { color:#d4f0d6; text-transform:uppercase; letter-spacing:.15em; font-size:.78rem; font-weight:800; }
-    h1 { font-size:clamp(2.5rem, 5vw, 4.5rem); line-height:1.06; margin:14px 0 22px; letter-spacing:-.045em; }
-    .hero p { max-width:650px; color:#e6f4e9; font-size:1.12rem; }
+    .eyebrow {
+      color:#d4f0d6;
+      text-transform:uppercase;
+      letter-spacing:.15em;
+      font-size:.78rem;
+      font-weight:800;
+    }
+    h1 {
+      font-size:clamp(2.5rem,5vw,4.5rem);
+      line-height:1.06;
+      margin:14px 0 22px;
+      letter-spacing:-.045em;
+    }
+    .hero p {
+      max-width:650px;
+      color:#e6f4e9;
+      font-size:1.12rem;
+    }
     .button {
-      display:inline-block; margin-top:17px; padding:12px 19px; border-radius:999px;
-      background:#d5f0c9; color:#174b32; text-decoration:none; font-weight:800;
-      transition:transform .2s, box-shadow .2s;
+      display:inline-block;
+      margin-top:17px;
+      padding:12px 19px;
+      border-radius:999px;
+      background:#d5f0c9;
+      color:#174b32;
+      text-decoration:none;
+      font-weight:800;
+      transition:transform .2s,box-shadow .2s;
     }
-    .button:hover { transform:translateY(-2px); box-shadow:0 8px 22px #0a382b55; }
+    .button:hover {
+      transform:translateY(-2px);
+      box-shadow:0 8px 22px #0a382b55;
+    }
     .hero-art {
-      min-height:260px; display:grid; place-items:center; position:relative;
+      min-height:260px;
+      display:grid;
+      place-items:center;
+      position:relative;
     }
     .orb {
-      width:230px; height:230px; border-radius:50%; display:grid; place-items:center;
-      background:linear-gradient(145deg,#e5f8d9,#a6d98d); color:#176b45;
-      box-shadow:0 25px 70px #073d2e66; font-size:100px;
+      width:230px;
+      height:230px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(145deg,#e5f8d9,#a6d98d);
+      color:#176b45;
+      box-shadow:0 25px 70px #073d2e66;
+      font-size:100px;
     }
-    .float { position:absolute; background:white; color:var(--green-dark); border-radius:14px; padding:10px 14px; font-weight:800; box-shadow:var(--shadow); }
-    .float.one { top:20px; right:0; } .float.two { bottom:16px; left:0; }
-    main { max-width:1120px; margin:auto; padding:0 22px; }
-    section { padding:76px 0; scroll-margin-top:80px; }
-    .section-head { max-width:720px; margin-bottom:30px; }
-    .kicker { color:var(--green); text-transform:uppercase; font-size:.78rem; font-weight:850; letter-spacing:.13em; }
-    h2 { margin:8px 0 12px; font-size:clamp(1.9rem,3vw,2.7rem); line-height:1.15; letter-spacing:-.03em; }
-    .lead { color:var(--muted); font-size:1.06rem; }
-    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .float {
+      position:absolute;
+      background:white;
+      color:var(--green-dark);
+      border-radius:14px;
+      padding:10px 14px;
+      font-weight:800;
+      box-shadow:var(--shadow);
+    }
+    .float.one { top:20px;right:0; }
+    .float.two { bottom:16px;left:0; }
+    main {
+      max-width:1120px;
+      margin:auto;
+      padding:0 22px;
+    }
+    section {
+      padding:76px 0;
+      scroll-margin-top:80px;
+    }
+    .section-head {
+      max-width:720px;
+      margin-bottom:30px;
+    }
+    .kicker {
+      color:var(--green);
+      text-transform:uppercase;
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.13em;
+    }
+    h2 {
+      margin:8px 0 12px;
+      font-size:clamp(1.9rem,3vw,2.7rem);
+      line-height:1.15;
+      letter-spacing:-.03em;
+    }
+    .lead {
+      color:var(--muted);
+      font-size:1.06rem;
+    }
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
     .card {
-      background:white; border:1px solid #e6eee8; border-radius:20px; padding:24px;
-      box-shadow:var(--shadow); transition:transform .2s, border-color .2s;
+      background:white;
+      border:1px solid #e6eee8;
+      border-radius:20px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      transition:transform .2s,border-color .2s;
     }
-    .card:hover { transform:translateY(-4px); border-color:#b9d9c2; }
-    .icon { width:48px; height:48px; display:grid; place-items:center; border-radius:15px; background:var(--mint); font-size:25px; }
-    h3 { margin:15px 0 8px; font-size:1.16rem; }
-    .card p { margin:0; color:var(--muted); }
-    .split { display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; }
-    .panel { background:var(--mint); border-radius:24px; padding:30px; }
-    .panel ul, .tips ul { padding-left:21px; }
-    .panel li, .tips li { margin:10px 0; }
-    .stat-row { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:20px; }
-    .stat { background:white; padding:17px; border-radius:15px; }
-    .stat strong { display:block; color:var(--green); font-size:1.15rem; }
-    .tips { background:#f0f7ef; border-radius:24px; padding:28px; }
-    .questions { counter-reset:q; display:grid; gap:12px; }
+    .card:hover {
+      transform:translateY(-4px);
+      border-color:#b9d9c2;
+    }
+    .icon {
+      width:48px;
+      height:48px;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      background:var(--mint);
+      font-size:25px;
+    }
+    h3 { margin:15px 0 8px;font-size:1.16rem; }
+    .card p { margin:0;color:var(--muted); }
+    .split {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:36px;
+      align-items:center;
+    }
+    .panel {
+      background:var(--mint);
+      border-radius:24px;
+      padding:30px;
+    }
+    .panel ul,.tips ul { padding-left:21px; }
+    .panel li,.tips li { margin:10px 0; }
+    .stat-row {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:20px;
+    }
+    .stat { background:white;padding:17px;border-radius:15px; }
+    .stat strong {
+      display:block;
+      color:var(--green);
+      font-size:1.15rem;
+    }
+    .tips {
+      background:#f0f7ef;
+      border-radius:24px;
+      padding:28px;
+    }
+    .questions { counter-reset:q;display:grid;gap:12px; }
     .question {
-      display:flex; align-items:flex-start; gap:15px; padding:17px 19px;
-      border:1px solid #e2ece4; background:white; border-radius:15px;
+      display:flex;
+      align-items:flex-start;
+      gap:15px;
+      padding:17px 19px;
+      border:1px solid #e2ece4;
+      background:white;
+      border-radius:15px;
+      flex-wrap:nowrap;
     }
     .question::before {
-      counter-increment:q; content:counter(q); flex:0 0 30px; height:30px;
-      display:grid; place-items:center; border-radius:50%; background:var(--green); color:white; font-weight:800;
+      counter-increment:q;
+      content:counter(q);
+      flex:0 0 30px;
+      height:30px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green);
+      color:white;
+      font-weight:800;
+    }
+    .q-body { flex:1; }
+    .q-btn {
+      all:unset;
+      cursor:pointer;
+      display:block;
+      width:100%;
+      font-weight:650;
+    }
+    .q-btn::after {
+      content:" ＋";
+      color:var(--green);
+      font-weight:800;
+    }
+    .q-btn[aria-expanded="true"]::after { content:" −"; }
+    .q-btn:focus-visible {
+      outline:3px solid var(--lime);
+      outline-offset:3px;
+      border-radius:6px;
+    }
+    .q-ans {
+      margin-top:10px;
+      color:var(--muted);
+      font-size:.95rem;
+      border-left:4px solid var(--lime);
+      padding-left:12px;
     }
     .cta {
-      text-align:center; color:white; background:linear-gradient(120deg,#104b34,#218052);
-      border-radius:26px; padding:42px 25px; margin:15px 0 75px;
+      text-align:center;
+      color:white;
+      background:linear-gradient(120deg,#104b34,#218052);
+      border-radius:26px;
+      padding:42px 25px;
+      margin:15px 0 75px;
     }
     .cta h2 { margin-top:0; }
-    .cta p { color:#e0f1e4; max-width:650px; margin:0 auto; }
-    footer { background:#103e2e; color:#dcece1; padding:27px 22px; text-align:center; }
-    footer p { margin:4px; }
-    .top { position:fixed; bottom:18px; right:18px; width:45px; height:45px; display:grid; place-items:center;
-      border-radius:50%; background:var(--green); color:white; text-decoration:none; box-shadow:var(--shadow); }
-    @media (max-width:760px) {
-      .nav { align-items:flex-start; flex-direction:column; }
-      nav { justify-content:flex-start; }
-      nav a { padding:6px 8px; font-size:.84rem; }
-      .hero-inner { grid-template-columns:1fr; padding:65px 22px 75px; }
-      .hero-art { min-height:220px; }
-      .orb { width:180px; height:180px; font-size:78px; }
-      .grid { grid-template-columns:1fr; }
-      .split { grid-template-columns:1fr; }
-      section { padding:55px 0; }
+    .cta p {
+      color:#e0f1e4;
+      max-width:650px;
+      margin:0 auto;
     }
-
-    .card.clickable { cursor:pointer; position:relative; }
-    .card.clickable::after { content:"Kattints a példákért →"; display:block; margin-top:12px; font-size:.85rem; font-weight:800; color:var(--green); }
-    .card.clickable.active { border-color:var(--green); background:var(--mint); }
-    .card.clickable:focus-visible { outline:3px solid var(--lime); outline-offset:2px; }
-    .app-panel { margin-top:22px; background:white; border:1px solid #cfe3d4; border-radius:22px; padding:26px; box-shadow:var(--shadow); }
-    .app-panel-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
+    footer {
+      background:#103e2e;
+      color:#dcece1;
+      padding:27px 22px;
+      text-align:center;
+    }
+    footer p { margin:4px; }
+    .top {
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      width:45px;
+      height:45px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green);
+      color:white;
+      text-decoration:none;
+      box-shadow:var(--shadow);
+    }
+    .card.clickable {
+      cursor:pointer;
+      position:relative;
+    }
+    .card.clickable::after {
+      content:"Kattints a példákért →";
+      display:block;
+      margin-top:12px;
+      font-size:.85rem;
+      font-weight:800;
+      color:var(--green);
+    }
+    .card.clickable.active {
+      border-color:var(--green);
+      background:var(--mint);
+    }
+    .card.clickable:focus-visible {
+      outline:3px solid var(--lime);
+      outline-offset:2px;
+    }
+    .app-panel {
+      margin-top:22px;
+      background:white;
+      border:1px solid #cfe3d4;
+      border-radius:22px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    .app-panel-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+    }
     .app-panel-head h3 { margin:0; }
-    .close-btn { border:0; background:var(--mint); color:var(--green-dark); width:36px; height:36px; border-radius:50%; font-size:18px; cursor:pointer; }
-    .app-list { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    .app { background:#f5faf6; border:1px solid #e2ece4; border-radius:16px; padding:18px; display:flex; flex-direction:column; gap:10px; }
-    .app h4 { margin:0; font-size:1.05rem; }
-    .app p { margin:0; color:var(--muted); font-size:.93rem; }
-    .store-row { display:flex; gap:8px; flex-wrap:wrap; }
-    .store { display:inline-flex; align-items:center; gap:6px; padding:7px 11px; border-radius:10px; background:var(--ink); color:white; text-decoration:none; font-size:.82rem; font-weight:700; }
-    .store svg { width:16px; height:16px; fill:currentColor; }
+    .close-btn {
+      border:0;
+      background:var(--mint);
+      color:var(--green-dark);
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      font-size:18px;
+      cursor:pointer;
+    }
+    .app-list {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    .app {
+      background:#f5faf6;
+      border:1px solid #e2ece4;
+      border-radius:16px;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .app h4 { margin:0;font-size:1.05rem; }
+    .app p { margin:0;color:var(--muted);font-size:.93rem; }
+    .store-row { display:flex;gap:8px;flex-wrap:wrap; }
+    .store {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 11px;
+      border-radius:10px;
+      background:var(--ink);
+      color:white;
+      text-decoration:none;
+      font-size:.82rem;
+      font-weight:700;
+    }
+    .store svg { width:16px;height:16px;fill:currentColor; }
     .store:hover { background:var(--green); }
-    .how-btn { align-self:flex-start; border:1.5px solid var(--green); background:transparent; color:var(--green-dark); border-radius:999px; padding:6px 13px; font-weight:800; font-size:.85rem; cursor:pointer; }
+    .how-btn {
+      align-self:flex-start;
+      border:1.5px solid var(--green);
+      background:transparent;
+      color:var(--green-dark);
+      border-radius:999px;
+      padding:6px 13px;
+      font-weight:800;
+      font-size:.85rem;
+      cursor:pointer;
+    }
     .how-btn:hover { background:var(--mint); }
-    .how { background:white; border-left:4px solid var(--lime); border-radius:8px; padding:10px 12px; font-size:.9rem; color:var(--ink); }
-    @media (max-width:760px) { .app-list { grid-template-columns:1fr; } }
-
-    .bg-fx { position:fixed; inset:0; z-index:-1; pointer-events:none;
+    .how {
+      background:white;
+      border-left:4px solid var(--lime);
+      border-radius:8px;
+      padding:10px 12px;
+      font-size:.9rem;
+      color:var(--ink);
+    }
+    .bg-fx {
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
       background:
-        radial-gradient(circle 420px at var(--mx,70%) var(--my,25%), rgba(23,107,69,.20), transparent 70%),
-        radial-gradient(circle 460px at calc(100% - var(--mx,70%)) calc(100% - var(--my,25%)), rgba(139,94,60,.20), transparent 70%),
-        linear-gradient(160deg, var(--c1,#e3f4e6), var(--c2,#d6ecd9)); }
-
-    .theme-btn { border:1.5px solid var(--green); background:transparent; color:var(--green-dark); border-radius:999px; padding:7px 13px; font-weight:800; font-size:.85rem; cursor:pointer; white-space:nowrap; }
+        radial-gradient(circle 420px at var(--mx,70%) var(--my,25%),rgba(23,107,69,.20),transparent 70%),
+        radial-gradient(circle 460px at calc(100% - var(--mx,70%)) calc(100% - var(--my,25%)),rgba(139,94,60,.20),transparent 70%),
+        linear-gradient(160deg,var(--c1,#e3f4e6),var(--c2,#d6ecd9));
+    }
+    .theme-btn {
+      border:1.5px solid var(--green);
+      background:transparent;
+      color:var(--green-dark);
+      border-radius:999px;
+      padding:7px 13px;
+      font-weight:800;
+      font-size:.85rem;
+      cursor:pointer;
+      white-space:nowrap;
+    }
     .theme-btn:hover { background:var(--mint); }
-    .question { flex-wrap:nowrap; }
-    .q-body { flex:1; }
-    .q-btn { all:unset; cursor:pointer; display:block; width:100%; font-weight:650; }
-    .q-btn::after { content:" ＋"; color:var(--green); font-weight:800; }
-    .q-btn[aria-expanded="true"]::after { content:" −"; }
-    .q-btn:focus-visible { outline:3px solid var(--lime); outline-offset:3px; border-radius:6px; }
-    .q-ans { margin-top:10px; color:var(--muted); font-size:.95rem; border-left:4px solid var(--lime); padding-left:12px; }
-    .quiz { margin-top:34px; background:white; border:1px solid #cfe3d4; border-radius:22px; padding:26px; box-shadow:var(--shadow); }
+    .quiz {
+      margin-top:34px;
+      background:white;
+      border:1px solid #cfe3d4;
+      border-radius:22px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
     .quiz h3 { margin-top:0; }
-    .quiz-meta { color:var(--muted); font-size:.9rem; font-weight:700; }
-    .quiz-q { font-size:1.1rem; font-weight:750; margin:8px 0 14px; }
-    .opts { display:grid; gap:10px; }
-    .opt { text-align:left; padding:12px 15px; border:1.5px solid #cfe3d4; background:transparent; color:var(--ink); border-radius:14px; font:inherit; cursor:pointer; }
-    .opt:hover:not(:disabled) { background:var(--mint); border-color:var(--green); }
-    .opt.ok { background:#d5f0c9; border-color:#2e9a5f; color:#0f3f29; }
-    .opt.bad { background:#f6d9d3; border-color:#c0583f; color:#5a1d10; }
-    .quiz-fb { margin-top:12px; font-weight:700; min-height:1.5em; }
-    .quiz-next { margin-top:10px; border:0; background:var(--green); color:white; padding:10px 18px; border-radius:999px; font-weight:800; cursor:pointer; }
-    :root[data-theme="dark"] { --ink:#e3efe6; --muted:#a3b8aa; --mint:#1f3a2d; --green:#4fb77f; --green-dark:#b9e4a5; --shadow:0 14px 38px rgba(0,0,0,.4); color-scheme:dark; }
+    .quiz-meta { color:var(--muted);font-size:.9rem;font-weight:700; }
+    .quiz-q { font-size:1.1rem;font-weight:750;margin:8px 0 14px; }
+    .opts { display:grid;gap:10px; }
+    .opt {
+      text-align:left;
+      padding:12px 15px;
+      border:1.5px solid #cfe3d4;
+      background:transparent;
+      color:var(--ink);
+      border-radius:14px;
+      font:inherit;
+      cursor:pointer;
+    }
+    .opt:hover:not(:disabled) {
+      background:var(--mint);
+      border-color:var(--green);
+    }
+    .opt.ok {
+      background:#d5f0c9;
+      border-color:#2e9a5f;
+      color:#0f3f29;
+    }
+    .opt.bad {
+      background:#f6d9d3;
+      border-color:#c0583f;
+      color:#5a1d10;
+    }
+    .quiz-fb { margin-top:12px;font-weight:700;min-height:1.5em; }
+    .quiz-next {
+      margin-top:10px;
+      border:0;
+      background:var(--green);
+      color:white;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    :root[data-theme="dark"] {
+      --ink:#e3efe6;
+      --muted:#a3b8aa;
+      --mint:#1f3a2d;
+      --green:#4fb77f;
+      --green-dark:#b9e4a5;
+      --shadow:0 14px 38px rgba(0,0,0,.4);
+      color-scheme:dark;
+    }
     [data-theme="dark"] body { background:#10201a; }
-    [data-theme="dark"] header { background:rgba(16,32,26,.92); border-bottom-color:#25402f; }
-    [data-theme="dark"] .card, [data-theme="dark"] .app-panel, [data-theme="dark"] .stat,
-    [data-theme="dark"] .question, [data-theme="dark"] .how, [data-theme="dark"] .quiz { background:#1b2c24; border-color:#2c4a3b; }
+    [data-theme="dark"] header {
+      background:rgba(16,32,26,.92);
+      border-bottom-color:#25402f;
+    }
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .app-panel,
+    [data-theme="dark"] .stat,
+    [data-theme="dark"] .question,
+    [data-theme="dark"] .how,
+    [data-theme="dark"] .quiz {
+      background:#1b2c24;
+      border-color:#2c4a3b;
+    }
     [data-theme="dark"] .card.clickable.active { background:var(--mint); }
     [data-theme="dark"] .tips { background:#1b2c24; }
-    [data-theme="dark"] .app { background:#213429; border-color:#2c4a3b; }
+    [data-theme="dark"] .app { background:#213429;border-color:#2c4a3b; }
     [data-theme="dark"] .store { background:#2f5240; }
     [data-theme="dark"] .store:hover { background:var(--green); }
-    [data-theme="dark"] .float { background:#1b2c24; color:#b9e4a5; }
+    [data-theme="dark"] .float { background:#1b2c24;color:#b9e4a5; }
     [data-theme="dark"] .opt { border-color:#2c4a3b; }
-    [data-theme="dark"] .opt.ok { background:#1f5c3a; color:#e6f7ea; }
-    [data-theme="dark"] .opt.bad { background:#5a2a20; color:#fbe3dc; }
-    [data-theme="dark"] .brand-mark, [data-theme="dark"] .top, [data-theme="dark"] .quiz-next, [data-theme="dark"] .question::before { background:#2e8a5c; }
-
-    .progress { position:fixed; top:0; left:0; right:0; height:4px; z-index:30; transform-origin:0 50%; transform:scaleX(var(--p,0)); background:linear-gradient(90deg,#2e9a5f,#b9e4a5,#a8794d); }
+    [data-theme="dark"] .opt.ok { background:#1f5c3a;color:#e6f7ea; }
+    [data-theme="dark"] .opt.bad { background:#5a2a20;color:#fbe3dc; }
+    [data-theme="dark"] .brand-mark,
+    [data-theme="dark"] .top,
+    [data-theme="dark"] .quiz-next,
+    [data-theme="dark"] .question::before { background:#2e8a5c; }
+    .progress {
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:4px;
+      z-index:30;
+      transform-origin:0 50%;
+      transform:scaleX(var(--p,0));
+      background:linear-gradient(90deg,#2e9a5f,#b9e4a5,#a8794d);
+    }
     .reveal { opacity:0; }
-    .reveal.in { opacity:1; animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards; animation-delay:var(--d,0s); }
+    .reveal.in {
+      opacity:1;
+      animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards;
+      animation-delay:var(--d,0s);
+    }
     .question.reveal.in { animation-name:slideIn; }
-    @keyframes rise { from { opacity:0; transform:translateY(46px) scale(.96); } }
-    @keyframes slideIn { from { opacity:0; transform:translateX(-60px); } }
+    @keyframes rise {
+      from { opacity:0;transform:translateY(46px) scale(.96); }
+    }
+    @keyframes slideIn {
+      from { opacity:0;transform:translateX(-60px); }
+    }
     .grid .card { translate:0 var(--py,0px); }
     .orb { translate:0 calc(var(--sy,0) * -.10px); }
     .float.one { translate:0 calc(var(--sy,0) * -.22px); }
     .float.two { translate:0 calc(var(--sy,0) * .12px); }
     .icon { animation:bob 3.6s ease-in-out infinite; }
-    .card:nth-child(2) .icon { animation-delay:-1.2s; } .card:nth-child(3) .icon { animation-delay:-2.4s; }
-    @keyframes bob { 50% { translate:0 -6px; rotate:-6deg; } }
-    .app { animation:pop .55s cubic-bezier(.2,.9,.3,1.3) backwards, hover 4.5s ease-in-out infinite; animation-delay:calc(var(--i,0) * .12s), calc(var(--i,0) * -1.3s); }
-    @keyframes pop { from { opacity:0; transform:translateY(40px) scale(.85) rotate(-3deg); } }
-    @keyframes hover { 50% { translate:0 -7px; } }
-    .game { background:white; border:1px solid #cfe3d4; border-radius:22px; padding:22px; box-shadow:var(--shadow); }
-    .hud { display:flex; flex-wrap:wrap; gap:10px 22px; justify-content:space-between; align-items:center; margin-bottom:12px; font-weight:800; }
+    .card:nth-child(2) .icon { animation-delay:-1.2s; }
+    .card:nth-child(3) .icon { animation-delay:-2.4s; }
+    @keyframes bob {
+      50% { translate:0 -6px;rotate:-6deg; }
+    }
+    .app {
+      animation:pop .55s cubic-bezier(.2,.9,.3,1.3) backwards,hover 4.5s ease-in-out infinite;
+      animation-delay:calc(var(--i,0) * .12s),calc(var(--i,0) * -1.3s);
+    }
+    @keyframes pop {
+      from { opacity:0;transform:translateY(40px) scale(.85) rotate(-3deg); }
+    }
+    @keyframes hover {
+      50% { translate:0 -7px; }
+    }
+    .game {
+      background:white;
+      border:1px solid #cfe3d4;
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    .hud {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 22px;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:12px;
+      font-weight:800;
+    }
     .hud span b { color:var(--green); }
-    #gc { width:100%; height:auto; display:block; border-radius:16px; background:#cfeed3; outline:none; }
-    #gc.playing { touch-action:none; cursor:none; }
-    .game-note { color:var(--muted); font-size:.9rem; margin:10px 0 0; }
+    #gc {
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:16px;
+      background:#cfeed3;
+      outline:none;
+    }
+    #gc.playing { touch-action:none;cursor:none; }
+    .game-note { color:var(--muted);font-size:.9rem;margin:10px 0 0; }
     .game .quiz-next { margin-top:0; }
-    [data-theme="dark"] .game { background:#1b2c24; border-color:#2c4a3b; }
-    @media (prefers-reduced-motion: reduce) { .icon, .app { animation:none; } .grid .card, .orb, .float { translate:none; } }
-
-    .chat-fab { position:fixed; bottom:18px; left:18px; z-index:40; border:0; cursor:pointer; background:var(--green); color:white; border-radius:999px; padding:13px 18px; font:inherit; font-weight:800; box-shadow:var(--shadow); }
+    [data-theme="dark"] .game { background:#1b2c24;border-color:#2c4a3b; }
+    @media (prefers-reduced-motion:reduce) {
+      .icon,.app { animation:none; }
+      .grid .card,.orb,.float { translate:none; }
+    }
+    .chat-fab {
+      position:fixed;
+      bottom:18px;
+      left:18px;
+      z-index:40;
+      border:0;
+      cursor:pointer;
+      background:var(--green);
+      color:white;
+      border-radius:999px;
+      padding:13px 18px;
+      font:inherit;
+      font-weight:800;
+      box-shadow:var(--shadow);
+    }
     .chat-fab:hover { filter:brightness(1.08); }
-    .chat { position:fixed; bottom:76px; left:18px; z-index:40; width:min(380px,calc(100vw - 36px)); height:min(540px,calc(100vh - 110px)); display:flex; flex-direction:column; background:white; border:1px solid #cfe3d4; border-radius:22px; box-shadow:0 20px 60px rgba(10,50,35,.28); overflow:hidden; animation:rise .35s cubic-bezier(.2,.8,.2,1) backwards; }
+    .chat {
+      position:fixed;
+      bottom:76px;
+      left:18px;
+      z-index:40;
+      width:min(380px,calc(100vw - 36px));
+      height:min(540px,calc(100vh - 110px));
+      display:flex;
+      flex-direction:column;
+      background:white;
+      border:1px solid #cfe3d4;
+      border-radius:22px;
+      box-shadow:0 20px 60px rgba(10,50,35,.28);
+      overflow:hidden;
+      animation:rise .35s cubic-bezier(.2,.8,.2,1) backwards;
+    }
     .chat[hidden] { display:none; }
-    .chat-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; color:white; background:linear-gradient(120deg,#104b34,#218052); font-weight:800; }
-    .chat-head small { display:block; font-weight:500; opacity:.85; }
-    .chat-head button { border:0; background:rgba(255,255,255,.18); color:white; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px; }
-    .chat-log { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
-    .msg { max-width:86%; padding:10px 13px; border-radius:16px; font-size:.93rem; line-height:1.5; white-space:pre-line; }
-    .msg.bot { align-self:flex-start; background:var(--mint); color:var(--ink); border-bottom-left-radius:4px; }
-    .msg.me { align-self:flex-end; background:var(--green); color:white; border-bottom-right-radius:4px; }
-    .msg a.jump { display:inline-block; margin-top:8px; font-weight:800; color:var(--green-dark); }
-    .chips { display:flex; flex-wrap:wrap; gap:7px; padding:0 14px 10px; }
-    .chip { border:1.5px solid var(--green); background:transparent; color:var(--green-dark); border-radius:999px; padding:5px 11px; font:inherit; font-size:.82rem; font-weight:700; cursor:pointer; }
+    .chat-head {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:14px 16px;
+      color:white;
+      background:linear-gradient(120deg,#104b34,#218052);
+      font-weight:800;
+    }
+    .chat-head small { display:block;font-weight:500;opacity:.85; }
+    .chat-head button {
+      border:0;
+      background:rgba(255,255,255,.18);
+      color:white;
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:16px;
+    }
+    .chat-log {
+      flex:1;
+      overflow-y:auto;
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .msg {
+      max-width:86%;
+      padding:10px 13px;
+      border-radius:16px;
+      font-size:.93rem;
+      line-height:1.5;
+      white-space:pre-line;
+    }
+    .msg.bot {
+      align-self:flex-start;
+      background:var(--mint);
+      color:var(--ink);
+      border-bottom-left-radius:4px;
+    }
+    .msg.me {
+      align-self:flex-end;
+      background:var(--green);
+      color:white;
+      border-bottom-right-radius:4px;
+    }
+    .msg a.jump {
+      display:inline-block;
+      margin-top:8px;
+      font-weight:800;
+      color:var(--green-dark);
+    }
+    .chips {
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      padding:0 14px 10px;
+    }
+    .chip {
+      border:1.5px solid var(--green);
+      background:transparent;
+      color:var(--green-dark);
+      border-radius:999px;
+      padding:5px 11px;
+      font:inherit;
+      font-size:.82rem;
+      font-weight:700;
+      cursor:pointer;
+    }
     .chip:hover { background:var(--mint); }
-    .chat-form { display:flex; gap:8px; padding:12px; border-top:1px solid #e2ece4; }
-    .chat-form input { flex:1; min-width:0; padding:10px 13px; border:1.5px solid #cfe3d4; border-radius:999px; font:inherit; background:transparent; color:var(--ink); }
-    .chat-form input:focus-visible { outline:3px solid var(--lime); outline-offset:1px; }
-    .chat-form button { border:0; background:var(--green); color:white; border-radius:999px; padding:0 16px; font-weight:800; cursor:pointer; }
-    .typing { opacity:.7; letter-spacing:.2em; }
-    [data-theme="dark"] .chat { background:#1b2c24; border-color:#2c4a3b; }
+    .chat-form {
+      display:flex;
+      gap:8px;
+      padding:12px;
+      border-top:1px solid #e2ece4;
+    }
+    .chat-form input {
+      flex:1;
+      min-width:0;
+      padding:10px 13px;
+      border:1.5px solid #cfe3d4;
+      border-radius:999px;
+      font:inherit;
+      background:transparent;
+      color:var(--ink);
+    }
+    .chat-form input:focus-visible {
+      outline:3px solid var(--lime);
+      outline-offset:1px;
+    }
+    .chat-form button {
+      border:0;
+      background:var(--green);
+      color:white;
+      border-radius:999px;
+      padding:0 16px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .typing { opacity:.7;letter-spacing:.2em; }
+    [data-theme="dark"] .chat { background:#1b2c24;border-color:#2c4a3b; }
     [data-theme="dark"] .chat-form { border-top-color:#2c4a3b; }
     [data-theme="dark"] .chat-form input { border-color:#2c4a3b; }
-    [data-theme="dark"] .msg.me, [data-theme="dark"] .chat-fab, [data-theme="dark"] .chat-form button { background:#2e8a5c; }
+    [data-theme="dark"] .msg.me,
+    [data-theme="dark"] .chat-fab,
+    [data-theme="dark"] .chat-form button { background:#2e8a5c; }
+
+    @media (max-width:760px) {
+      .nav { align-items:flex-start;flex-direction:column; }
+      nav { justify-content:flex-start; }
+      nav a { padding:6px 8px;font-size:.84rem; }
+      .hero-inner { grid-template-columns:1fr;padding:65px 22px 75px; }
+      .hero-art { min-height:220px; }
+      .orb { width:180px;height:180px;font-size:78px; }
+      .grid,.app-list { grid-template-columns:1fr; }
+      .split { grid-template-columns:1fr; }
+      section { padding:55px 0; }
+    }
   </style>
 </head>
 <body>
   <div class="progress" aria-hidden="true"></div>
   <div class="bg-fx" aria-hidden="true"></div>
+
   <header>
     <div class="nav">
-      <a class="brand" href="#kezdo"><span class="brand-mark">🌱</span><span>9.C · Zöld jövő</span></a>
+      <a class="brand" href="#kezdo">
+        <span class="brand-mark">🌱</span>
+        <span>9.C · Zöld jövő</span>
+      </a>
       <nav aria-label="Fő navigáció">
         <a href="#alkalmazasok">Okos appok</a>
         <a href="#papirmentes">Papírmentes iroda</a>
@@ -279,9 +817,21 @@
         <p class="lead">A megfelelő alkalmazások segítenek tudatosabb döntéseket hozni, és egyszerűbbé teszik a környezetbarát szokások kialakítását.</p>
       </div>
       <div class="grid">
-        <article class="card clickable" data-cat="viz" tabindex="0" role="button" aria-expanded="false" aria-controls="app-panel"><div class="icon">💧</div><h3>Víz- és energiafigyelés</h3><p>Okos mérők és alkalmazások segítségével nyomon követhetjük a fogyasztást, így könnyebben észrevehetjük a pazarlást.</p></article>
-        <article class="card clickable" data-cat="hulladek" tabindex="0" role="button" aria-expanded="false" aria-controls="app-panel"><div class="icon">♻️</div><h3>Szelektív hulladékgyűjtés</h3><p>Hulladékgyűjtési útmutatók segítenek eldönteni, melyik hulladékot hová kell dobni, és hol található gyűjtőpont.</p></article>
-        <article class="card clickable" data-cat="kozlekedes" tabindex="0" role="button" aria-expanded="false" aria-controls="app-panel"><div class="icon">🚌</div><h3>Közlekedéstervezés</h3><p>Útvonaltervezőkkel összehasonlíthatjuk a tömegközlekedést, a kerékpározást és a gyaloglást.</p></article>
+        <article class="card clickable" data-cat="viz" tabindex="0" role="button" aria-expanded="false" aria-controls="app-panel">
+          <div class="icon">💧</div>
+          <h3>Víz- és energiafigyelés</h3>
+          <p>Okos mérők és alkalmazások segítségével nyomon követhetjük a fogyasztást, így könnyebben észrevehetjük a pazarlást.</p>
+        </article>
+        <article class="card clickable" data-cat="hulladek" tabindex="0" role="button" aria-expanded="false" aria-controls="app-panel">
+          <div class="icon">♻️</div>
+          <h3>Szelektív hulladékgyűjtés</h3>
+          <p>Hulladékgyűjtési útmutatók segítenek eldönteni, melyik hulladékot hová kell dobni, és hol található gyűjtőpont.</p>
+        </article>
+        <article class="card clickable" data-cat="kozlekedes" tabindex="0" role="button" aria-expanded="false" aria-controls="app-panel">
+          <div class="icon">🚌</div>
+          <h3>Közlekedéstervezés</h3>
+          <p>Útvonaltervezőkkel összehasonlíthatjuk a tömegközlekedést, a kerékpározást és a gyaloglást.</p>
+        </article>
       </div>
       <div id="app-panel" class="app-panel" hidden aria-live="polite"></div>
     </section>
@@ -293,8 +843,14 @@
           <h2>Digitális, papírmentes iroda</h2>
           <p class="lead">A dokumentumok elektronikus kezelése csökkentheti a papírfelhasználást, a nyomtatási költségeket és az adminisztrációval járó felesleges lépéseket.</p>
           <div class="stat-row">
-            <div class="stat"><strong>Online dokumentumok</strong><span>Egyszerű megosztás és közös szerkesztés.</span></div>
-            <div class="stat"><strong>Digitális ügyintézés</strong><span>Kevesebb papír és személyes ügyintézés.</span></div>
+            <div class="stat">
+              <strong>Online dokumentumok</strong>
+              <span>Egyszerű megosztás és közös szerkesztés.</span>
+            </div>
+            <div class="stat">
+              <strong>Digitális ügyintézés</strong>
+              <span>Kevesebb papír és személyes ügyintézés.</span>
+            </div>
           </div>
         </div>
         <div class="panel">
@@ -316,9 +872,21 @@
         <p class="lead">A digitális eszközök gyártása és használata is terheli a környezetet. Néhány egyszerű szokással csökkenthetjük ezt a hatást.</p>
       </div>
       <div class="grid">
-        <article class="card"><div class="icon">🔋</div><h3>Energiatakarékosság</h3><p>Kapcsoljuk ki a nem használt eszközöket, és használjunk energiatakarékos üzemmódot.</p></article>
-        <article class="card"><div class="icon">🛠️</div><h3>Hosszabb élettartam</h3><p>Vigyázzunk eszközeinkre, javítsuk meg őket, és ne cseréljük le idő előtt a még működő készülékeket.</p></article>
-        <article class="card"><div class="icon">📦</div><h3>Elektronikai hulladék</h3><p>A régi telefonokat, akkumulátorokat és számítógépeket megfelelő gyűjtőhelyen adjuk le.</p></article>
+        <article class="card">
+          <div class="icon">🔋</div>
+          <h3>Energiatakarékosság</h3>
+          <p>Kapcsoljuk ki a nem használt eszközöket, és használjunk energiatakarékos üzemmódot.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🛠️</div>
+          <h3>Hosszabb élettartam</h3>
+          <p>Vigyázzunk eszközeinkre, javítsuk meg őket, és ne cseréljük le idő előtt a még működő készülékeket.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📦</div>
+          <h3>Elektronikai hulladék</h3>
+          <p>A régi telefonokat, akkumulátorokat és számítógépeket megfelelő gyűjtőhelyen adjuk le.</p>
+        </article>
       </div>
     </section>
 
@@ -329,11 +897,36 @@
         <p class="lead">Ezek a kérdések segítenek továbbgondolni, hogyan lehet egy iskola vagy iroda működése fenntarthatóbb.</p>
       </div>
       <div class="questions">
-        <div class="question"><div class="q-body"><button class="q-btn" type="button" aria-expanded="false">Hogyan lehet papírmentes irodát működtetni?</button><div class="q-ans" hidden>Elektronikus dokumentumokat, online űrlapokat és felhős tárhelyet használunk, a régi papírokat beszkenneljük, nyomtatni pedig csak akkor nyomtatunk, ha tényleg szükséges.</div></div></div>
-        <div class="question"><div class="q-body"><button class="q-btn" type="button" aria-expanded="false">Milyen szervezési módszerekkel lehet csökkenteni egy iroda ökológiai lábnyomát?</button><div class="q-ans" hidden>Energiatakarékos eszközbeállítások, közös eszközhasználat, online megbeszélések, szelektív hulladékgyűjtés és tudatos beszerzés mind csökkentik a lábnyomot.</div></div></div>
-        <div class="question"><div class="q-body"><button class="q-btn" type="button" aria-expanded="false">Milyen szerepe van az adminisztrációnak a fenntartható működésben?</button><div class="q-ans" hidden>A jól szervezett digitális adminisztráció kevesebb papírt és energiát fogyaszt, gyorsabb, és könnyebben nyomon követhető benne a fogyasztás is.</div></div></div>
-        <div class="question"><div class="q-body"><button class="q-btn" type="button" aria-expanded="false">Milyen digitális eszközök segítik a fenntartható ügyvitelt?</button><div class="q-ans" hidden>Felhős tárhely, közös szerkesztésű dokumentumok, online űrlapok, digitális aláírás és projektkezelő eszközök segítik a papírmentes ügyvitelt.</div></div></div>
-        <div class="question"><div class="q-body"><button class="q-btn" type="button" aria-expanded="false">Hogyan lehet zöld rendezvényt szervezni egy intézményben?</button><div class="q-ans" hidden>Digitális meghívó és jegy, jó tömegközlekedési megközelíthetőség, többször használható edények, helyi alapanyagok és jól jelölt szelektív gyűjtők.</div></div></div>
+        <div class="question">
+          <div class="q-body">
+            <button class="q-btn" type="button" aria-expanded="false">Hogyan lehet papírmentes irodát működtetni?</button>
+            <div class="q-ans" hidden>Elektronikus dokumentumokat, online űrlapokat és felhős tárhelyet használunk, a régi papírokat beszkenneljük, nyomtatni pedig csak akkor nyomtatunk, ha tényleg szükséges.</div>
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-body">
+            <button class="q-btn" type="button" aria-expanded="false">Milyen szervezési módszerekkel lehet csökkenteni egy iroda ökológiai lábnyomát?</button>
+            <div class="q-ans" hidden>Energiatakarékos eszközbeállítások, közös eszközhasználat, online megbeszélések, szelektív hulladékgyűjtés és tudatos beszerzés mind csökkentik a lábnyomot.</div>
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-body">
+            <button class="q-btn" type="button" aria-expanded="false">Milyen szerepe van az adminisztrációnak a fenntartható működésben?</button>
+            <div class="q-ans" hidden>A jól szervezett digitális adminisztráció kevesebb papírt és energiát fogyaszt, gyorsabb, és könnyebben nyomon követhető benne a fogyasztás is.</div>
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-body">
+            <button class="q-btn" type="button" aria-expanded="false">Milyen digitális eszközök segítik a fenntartható ügyvitelt?</button>
+            <div class="q-ans" hidden>Felhős tárhely, közös szerkesztésű dokumentumok, online űrlapok, digitális aláírás és projektkezelő eszközök segítik a papírmentes ügyvitelt.</div>
+          </div>
+        </div>
+        <div class="question">
+          <div class="q-body">
+            <button class="q-btn" type="button" aria-expanded="false">Hogyan lehet zöld rendezvényt szervezni egy intézményben?</button>
+            <div class="q-ans" hidden>Digitális meghívó és jegy, jó tömegközlekedési megközelíthetőség, többször használható edények, helyi alapanyagok és jól jelölt szelektív gyűjtők.</div>
+          </div>
+        </div>
       </div>
       <div class="quiz" id="quiz" aria-live="polite"></div>
     </section>
@@ -345,7 +938,12 @@
         <p class="lead">Mozgasd a kukát egérrel, ujjal vagy a nyilakkal, és kapd el a lehulló szemetet. A virágokra és a madarakra vigyázz, azokat nem szabad elkapni!</p>
       </div>
       <div class="game">
-        <div class="hud"><span>⏱️ Idő: <b id="g-time">40</b> mp</span><span>🗑️ Pont: <b id="g-score">0</b></span><span>🏆 Rekord: <b id="g-best">0</b></span><button class="quiz-next" id="g-start" type="button">▶ Start</button></div>
+        <div class="hud">
+          <span>⏱️ Idő: <b id="g-time">40</b> mp</span>
+          <span>🗑️ Pont: <b id="g-score">0</b></span>
+          <span>🏆 Rekord: <b id="g-best">0</b></span>
+          <button class="quiz-next" id="g-start" type="button">▶ Start</button>
+        </div>
         <canvas id="gc" width="640" height="400" tabindex="0" aria-label="Szemétszedős minijáték"></canvas>
         <p class="game-note">Szemét: +1 pont · virág, madár, fa: −2 pont</p>
       </div>
@@ -380,63 +978,162 @@
     <p><strong>9.C osztály · Digitális megoldások a fenntartható életért</strong></p>
     <p>Tanuljunk, fejlődjünk, vigyázzunk a bolygónkra! 🌱</p>
   </footer>
+
   <button class="chat-fab" id="chat-fab" type="button" aria-expanded="false" aria-controls="chat">💬 Zöld Segítő</button>
+
   <div class="chat" id="chat" role="dialog" aria-label="Zöld Segítő chat" hidden>
-    <div class="chat-head"><div>🌱 Zöld Segítő<small>Kérdezz a környezetvédelemről!</small></div><button type="button" id="chat-close" aria-label="Chat bezárása">✕</button></div>
+    <div class="chat-head">
+      <div>🌱 Zöld Segítő<small>Kérdezz a környezetvédelemről!</small></div>
+      <button type="button" id="chat-close" aria-label="Chat bezárása">✕</button>
+    </div>
     <div class="chat-log" id="chat-log" aria-live="polite"></div>
     <div class="chips" id="chat-chips"></div>
-    <form class="chat-form" id="chat-form" autocomplete="off"><input id="chat-in" type="text" maxlength="200" placeholder="Írd be a kérdésed…" aria-label="Kérdésed"><button type="submit">Küld</button></form>
+    <form class="chat-form" id="chat-form" autocomplete="off">
+      <input id="chat-in" type="text" maxlength="200" placeholder="Írd be a kérdésed…" aria-label="Kérdésed">
+      <button type="submit">Küld</button>
+    </form>
   </div>
+
   <a class="top" href="#kezdo" aria-label="Vissza az oldal tetejére">↑</a>
 
   <script>
-    const GP='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.5v19c0 .5.5.8.9.5L20 12 4.9 2C4.500 1.700 4 2 4 2.500z"/></svg>';
-    const AP='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.400 12.700c0-2.300 1.900-3.400 2-3.500-1.100-1.600-2.800-1.800-3.400-1.800-1.400-.1-2.800.9-3.500.9s-1.800-.8-3-.8c-1.500 0-3 .9-3.800 2.300-1.600 2.800-.4 7 1.200 9.300.8 1.100 1.700 2.400 2.900 2.300 1.200 0 1.600-.7 3-.7s1.800.7 3 .7c1.300 0 2.100-1.100 2.800-2.200.9-1.300 1.300-2.500 1.300-2.600 0 0-2.500-1-2.500-3.900zM14.200 5.800c.6-.8 1.100-1.800.9-2.800-.9 0-2 .6-2.700 1.400-.6.700-1.100 1.800-.9 2.700 1 .1 2-.5 2.700-1.300z"/></svg>';
+    const GP='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.5v19c0 .5.5.8.9.5L20 12 4.9 2C4.5 1.7 4 2 4 2.5z"/></svg>';
+    const AP='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.9zM14.2 5.8c.6-.8 1.1-1.8.9-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.7 1 .1 2-.5 2.7-1.3z"/></svg>';
+
     const DATA={
-      viz:{title:'💧 Víz- és energiafigyelés – példa alkalmazások',apps:[
-        {n:'Home Assistant',d:'Okosotthon-rendszer, amely egy áttekinthető felületen mutatja a háztartás energiafogyasztását.',h:'Az okos mérőkhöz és eszközökhöz csatlakozik, összegyűjti a fogyasztási adatokat, majd grafikonokon mutatja meg, mikor és mennyi energiát használunk.'},
-        {n:'Google Home',d:'Okos eszközök irányítása és energiafelhasználásuk követése egy helyen.',h:'Az otthoni okos izzókat, konnektorokat és termosztátokat összeköti a telefonoddal, így távolról lekapcsolhatod, ami feleslegesen megy.'},
-        {n:'SmartThings',d:'Samsung okosotthon-app a háztartási gépek energiafogyasztásának figyeléséhez.',h:'A készülékek adatait elemzi, és jelzi, melyik fogyaszt a legtöbbet, így könnyebb észrevenni a pazarlást.'}]},
-      hulladek:{title:'♻️ Szelektív hulladékgyűjtés – példa alkalmazások',apps:[
-        {n:'Recycle Coach',d:'Megmutatja, melyik hulladék melyik gyűjtőbe való, és emlékeztet az elszállítás napjaira.',h:'Megadod a lakóhelyedet, az app pedig helyi szabályok szerint ad útmutatót és értesítést küld a gyűjtési napokról.'},
-        {n:'Too Good To Go',d:'Éttermek és boltok megmaradt ételeit kapod kedvező áron, így nem kerül kukába.',h:'A közeli partnerek kedvezményes „meglepetéscsomagot” kínálnak, te lefoglalod, majd megadott időben átveszed.'},
-        {n:'OLIO',d:'Felesleges ételek és tárgyak ingyenes megosztása a környékbeliekkel.',h:'Feltöltesz egy fotót arról, amit nem használsz, a közelben élők pedig jelentkezhetnek érte, és átvehetik.'}]},
-      kozlekedes:{title:'🚌 Közlekedéstervezés – példa alkalmazások',apps:[
-        {n:'BKK Futár',d:'Budapesti tömegközlekedés valós idejű menetrenddel és útvonaltervezéssel.',h:'A járművek GPS-adatai alapján megmutatja a pontos érkezési időt, és a legjobb átszállásos útvonalat is megtervezi.'},
-        {n:'Google Térkép',d:'Útvonaltervezés autóra, tömegközlekedésre, kerékpárra és gyaloglásra.',h:'Megadod az indulási és érkezési helyet, az app pedig összehasonlítja az utazási módokat idő szerint.'},
-        {n:'Moovit',d:'Tömegközlekedési navigáció sok városban, élő információkkal.',h:'Valós idejű adatokból számolja ki, melyik busz, villamos vagy metró visz leggyorsabban a célodhoz.'}]}
+      viz:{
+        title:'💧 Víz- és energiafigyelés – példa alkalmazások',
+        apps:[
+          {
+            n:'Home Assistant',
+            d:'Okosotthon-rendszer, amely egy áttekinthető felületen mutatja a háztartás energiafogyasztását.',
+            h:'Az okos mérőkhöz és eszközökhöz csatlakozik, összegyűjti a fogyasztási adatokat, majd grafikonokon mutatja meg, mikor és mennyi energiát használunk.'
+          },
+          {
+            n:'Google Home',
+            d:'Okos eszközök irányítása és energiafelhasználásuk követése egy helyen.',
+            h:'Az otthoni okos izzókat, konnektorokat és termosztátokat összeköti a telefonoddal, így távolról lekapcsolhatod, ami feleslegesen megy.'
+          },
+          {
+            n:'SmartThings',
+            d:'Samsung okosotthon-app a háztartási gépek energiafogyasztásának figyeléséhez.',
+            h:'A készülékek adatait elemzi, és jelzi, melyik fogyaszt a legtöbbet, így könnyebb észrevenni a pazarlást.'
+          }
+        ]
+      },
+      hulladek:{
+        title:'♻️ Szelektív hulladékgyűjtés – példa alkalmazások',
+        apps:[
+          {
+            n:'Recycle Coach',
+            d:'Megmutatja, melyik hulladék melyik gyűjtőbe való, és emlékeztet az elszállítás napjaira.',
+            h:'Megadod a lakóhelyedet, az app pedig helyi szabályok szerint ad útmutatót és értesítést küld a gyűjtési napokról.'
+          },
+          {
+            n:'Too Good To Go',
+            d:'Éttermek és boltok megmaradt ételeit kapod kedvező áron, így nem kerül kukába.',
+            h:'A közeli partnerek kedvezményes „meglepetéscsomagot” kínálnak, te lefoglalod, majd megadott időben átveszed.'
+          },
+          {
+            n:'OLIO',
+            d:'Felesleges ételek és tárgyak ingyenes megosztása a környékbeliekkel.',
+            h:'Feltöltesz egy fotót arról, amit nem használsz, a közelben élők pedig jelentkezhetnek érte, és átvehetik.'
+          }
+        ]
+      },
+      kozlekedes:{
+        title:'🚌 Közlekedéstervezés – példa alkalmazások',
+        apps:[
+          {
+            n:'BKK Futár',
+            d:'Budapesti tömegközlekedés valós idejű menetrenddel és útvonaltervezéssel.',
+            h:'A járművek GPS-adatai alapján megmutatja a pontos érkezési időt, és a legjobb átszállásos útvonalat is megtervezi.'
+          },
+          {
+            n:'Google Térkép',
+            d:'Útvonaltervezés autóra, tömegközlekedésre, kerékpárra és gyaloglásra.',
+            h:'Megadod az indulási és érkezési helyet, az app pedig összehasonlítja az utazási módokat idő szerint.'
+          },
+          {
+            n:'Moovit',
+            d:'Tömegközlekedési navigáció sok városban, élő információkkal.',
+            h:'Valós idejű adatokból számolja ki, melyik busz, villamos vagy metró visz leggyorsabban a célodhoz.'
+          }
+        ]
+      }
     };
+
     const panel=document.getElementById('app-panel');
     const cards=document.querySelectorAll('.card.clickable');
+
     function render(cat){
       const c=DATA[cat];
       panel.innerHTML='<div class="app-panel-head"><h3>'+c.title+'</h3><button class="close-btn" aria-label="Bezárás">✕</button></div><div class="app-list">'+
-        c.apps.map((a,ix)=>{const q=encodeURIComponent(a.n);return '<div class="app" style="--i:'+ix+'"><h4>'+a.n+'</h4><p>'+a.d+'</p>'+
-        '<div class="store-row"><a class="store" target="_blank" rel="noopener" href="https://play.google.com/store/search?q='+q+'&c=apps">'+GP+'Google Play</a>'+
-        '<a class="store" target="_blank" rel="noopener" href="https://apps.apple.com/search?term='+q+'">'+AP+'App Store</a></div>'+
-        '<button class="how-btn" aria-expanded="false">Hogyan működik?</button><div class="how" hidden>'+a.h+'</div></div>';}).join('')+'</div>';
+        c.apps.map((a,ix)=>{
+          const q=encodeURIComponent(a.n);
+          return '<div class="app" style="--i:'+ix+'"><h4>'+a.n+'</h4><p>'+a.d+'</p>'+
+            '<div class="store-row"><a class="store" target="_blank" rel="noopener" href="https://play.google.com/store/search?q='+q+'&c=apps">'+GP+'Google Play</a>'+
+            '<a class="store" target="_blank" rel="noopener" href="https://apps.apple.com/search?term='+q+'">'+AP+'App Store</a></div>'+
+            '<button class="how-btn" aria-expanded="false">Hogyan működik?</button><div class="how" hidden>'+a.h+'</div></div>';
+        }).join('')+'</div>';
+
       panel.hidden=false;
       panel.querySelector('.close-btn').onclick=closePanel;
-      panel.querySelectorAll('.how-btn').forEach(b=>b.onclick=()=>{
-        const box=b.nextElementSibling;box.hidden=!box.hidden;b.setAttribute('aria-expanded',!box.hidden);
-        b.textContent=box.hidden?'Hogyan működik?':'Elrejt';});
+
+      panel.querySelectorAll('.how-btn').forEach(b=>{
+        b.onclick=()=>{
+          const box=b.nextElementSibling;
+          box.hidden=!box.hidden;
+          b.setAttribute('aria-expanded',!box.hidden);
+          b.textContent=box.hidden?'Hogyan működik?':'Elrejt';
+        };
+      });
     }
-    function closePanel(){panel.hidden=true;cards.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-expanded','false');});}
+
+    function closePanel(){
+      panel.hidden=true;
+      cards.forEach(x=>{
+        x.classList.remove('active');
+        x.setAttribute('aria-expanded','false');
+      });
+    }
+
     function pick(card){
-      if(card.classList.contains('active')){closePanel();return;}
-      cards.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-expanded','false');});
-      card.classList.add('active');card.setAttribute('aria-expanded','true');
-      render(card.dataset.cat);panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+      if(card.classList.contains('active')){
+        closePanel();
+        return;
+      }
+      cards.forEach(x=>{
+        x.classList.remove('active');
+        x.setAttribute('aria-expanded','false');
+      });
+      card.classList.add('active');
+      card.setAttribute('aria-expanded','true');
+      render(card.dataset.cat);
+      panel.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
-    cards.forEach(c=>{c.addEventListener('click',()=>pick(c));
-      c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(c);}});});
+
+    cards.forEach(c=>{
+      c.addEventListener('click',()=>pick(c));
+      c.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){
+          e.preventDefault();
+          pick(c);
+        }
+      });
+    });
   </script>
 
   <script>
     (function(){
       const r=document.documentElement.style;
       const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t)).join(',');
-      const PAL={light:{G1:[227,244,230],B1:[239,226,208],G2:[205,232,212],B2:[214,188,156]},dark:{G1:[16,40,30],B1:[44,33,25],G2:[11,30,23],B2:[36,27,20]}};
+
+      const PAL={
+        light:{G1:[227,244,230],B1:[239,226,208],G2:[205,232,212],B2:[214,188,156]},
+        dark:{G1:[16,40,30],B1:[44,33,25],G2:[11,30,23],B2:[36,27,20]}
+      };
+
       function scrollColors(){
         const P=PAL[document.documentElement.dataset.theme==='dark'?'dark':'light'];
         const max=document.documentElement.scrollHeight-innerHeight;
@@ -444,14 +1141,17 @@
         r.setProperty('--c1','rgb('+mix(P.G1,P.B1,t)+')');
         r.setProperty('--c2','rgb('+mix(P.G2,P.B2,t)+')');
       }
+
       addEventListener('scroll',scrollColors,{passive:true});
       addEventListener('resize',scrollColors);
+
       if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
         addEventListener('pointermove',e=>{
           r.setProperty('--mx',(e.clientX/innerWidth*100).toFixed(1)+'%');
           r.setProperty('--my',(e.clientY/innerHeight*100).toFixed(1)+'%');
         },{passive:true});
       }
+
       window.__bg=scrollColors;
       scrollColors();
     })();
@@ -459,228 +1159,669 @@
 
   <script>
     (function(){
-      const root=document.documentElement, tb=document.getElementById('theme-btn');
-      function label(){const d=root.dataset.theme==='dark';tb.textContent=d?'☀️ Világos mód':'🌙 Sötét mód';tb.setAttribute('aria-pressed',d);}
+      const root=document.documentElement;
+      const tb=document.getElementById('theme-btn');
+
+      function label(){
+        const d=root.dataset.theme==='dark';
+        tb.textContent=d?'☀️ Világos mód':'🌙 Sötét mód';
+        tb.setAttribute('aria-pressed',d);
+      }
+
       tb.addEventListener('click',()=>{
         root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
         try{localStorage.setItem('theme',root.dataset.theme);}catch(e){}
-        label();if(window.__bg)window.__bg();
+        label();
+        if(window.__bg)window.__bg();
       });
+
       label();
-      document.querySelectorAll('.q-btn').forEach(b=>b.addEventListener('click',()=>{
-        const a=b.nextElementSibling;a.hidden=!a.hidden;b.setAttribute('aria-expanded',!a.hidden);}));
+
+      document.querySelectorAll('.q-btn').forEach(b=>{
+        b.addEventListener('click',()=>{
+          const a=b.nextElementSibling;
+          a.hidden=!a.hidden;
+          b.setAttribute('aria-expanded',!a.hidden);
+        });
+      });
 
       const QZ=[
-        {q:'Mivel csökkenthető leginkább a papírfelhasználás egy irodában?',o:['Mindent kinyomtatunk, ami fontos','Online dokumentumokat osztunk meg és szerkesztünk közösen','Minden anyagból két példányt készítünk'],c:1,e:'Az online megosztás és közös szerkesztés szükségtelenné teszi a nyomtatást.'},
-        {q:'Hová vigyük a már használhatatlan régi telefont?',o:['A kommunális szemétbe','A papírgyűjtőbe','Elektronikai hulladékgyűjtő helyre'],c:2,e:'Az akkumulátor és az értékes alkatrészek miatt külön gyűjtőhelyen adjuk le.'},
-        {q:'Melyik alkalmazás segít a közlekedés megtervezésében?',o:['BKK Futár','OLIO','Too Good To Go'],c:0,e:'A BKK Futár valós idejű menetrenddel és útvonaltervezéssel segít Budapesten.'},
-        {q:'Melyik szokás növeli egy digitális eszköz élettartamát?',o:['Azonnal lecseréljük az újabbra','Megjavíttatjuk és óvjuk','Mindig teljesen lemerítjük'],c:1,e:'A javítás és a gondos használat csökkenti az új eszközök gyártásával járó terhelést.'}
+        {
+          q:'Mivel csökkenthető leginkább a papírfelhasználás egy irodában?',
+          o:['Mindent kinyomtatunk, ami fontos','Online dokumentumokat osztunk meg és szerkesztünk közösen','Minden anyagból két példányt készítünk'],
+          c:1,
+          e:'Az online megosztás és közös szerkesztés szükségtelenné teszi a nyomtatást.'
+        },
+        {
+          q:'Hová vigyük a már használhatatlan régi telefont?',
+          o:['A kommunális szemétbe','A papírgyűjtőbe','Elektronikai hulladékgyűjtő helyre'],
+          c:2,
+          e:'Az akkumulátor és az értékes alkatrészek miatt külön gyűjtőhelyen adjuk le.'
+        },
+        {
+          q:'Melyik alkalmazás segít a közlekedés megtervezésében?',
+          o:['BKK Futár','OLIO','Too Good To Go'],
+          c:0,
+          e:'A BKK Futár valós idejű menetrenddel és útvonaltervezéssel segít Budapesten.'
+        },
+        {
+          q:'Melyik szokás növeli egy digitális eszköz élettartamát?',
+          o:['Azonnal lecseréljük az újabbra','Megjavíttatjuk és óvjuk','Mindig teljesen lemerítjük'],
+          c:1,
+          e:'A javítás és a gondos használat csökkenti az új eszközök gyártásával járó terhelést.'
+        }
       ];
-      const box=document.getElementById('quiz');let idx=0,score=0;
+
+      const box=document.getElementById('quiz');
+      let idx=0,score=0;
+
       function show(){
         if(idx>=QZ.length){
-          const msg=score===QZ.length?'Tökéletes, igazi zöld szakértő vagy! 🌟':score>=2?'Ügyes vagy, már csak egy kicsit kell csiszolni! 🌱':'Próbáld újra, nézd át az oldalt! 📚';
+          const msg=score===QZ.length
+            ?'Tökéletes, igazi zöld szakértő vagy! 🌟'
+            :score>=2
+              ?'Ügyes vagy, már csak egy kicsit kell csiszolni! 🌱'
+              :'Próbáld újra, nézd át az oldalt! 📚';
+
           box.innerHTML='<h3>🌿 Eredményed</h3><p class="quiz-q">'+score+' / '+QZ.length+' helyes válasz</p><p>'+msg+'</p><button class="quiz-next" id="qr">Újrakezdés</button>';
-          document.getElementById('qr').onclick=()=>{idx=0;score=0;show();};return;}
+
+          document.getElementById('qr').onclick=()=>{
+            idx=0;
+            score=0;
+            show();
+          };
+          return;
+        }
+
         const d=QZ[idx];
+
         box.innerHTML='<h3>🧠 Teszteld a tudásod!</h3><div class="quiz-meta">'+(idx+1)+'. kérdés / '+QZ.length+'</div><div class="quiz-q">'+d.q+'</div><div class="opts">'+
           d.o.map((t,k)=>'<button class="opt" data-k="'+k+'">'+t+'</button>').join('')+'</div><div class="quiz-fb"></div>';
-        box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
-          const k=+b.dataset.k,ok=k===d.c;if(ok)score++;
-          box.querySelectorAll('.opt').forEach((x,j)=>{x.disabled=true;if(j===d.c)x.classList.add('ok');});
-          if(!ok)b.classList.add('bad');
-          const fb=box.querySelector('.quiz-fb');
-          fb.textContent=(ok?'✅ Helyes! ':'❌ Nem egészen. ')+d.e;
-          const n=document.createElement('button');n.className='quiz-next';n.textContent=idx+1<QZ.length?'Következő →':'Eredmény';
-          n.onclick=()=>{idx++;show();};fb.after(n);
+
+        box.querySelectorAll('.opt').forEach(b=>{
+          b.onclick=()=>{
+            const k=+b.dataset.k;
+            const ok=k===d.c;
+            if(ok)score++;
+
+            box.querySelectorAll('.opt').forEach((x,j)=>{
+              x.disabled=true;
+              if(j===d.c)x.classList.add('ok');
+            });
+
+            if(!ok)b.classList.add('bad');
+
+            const fb=box.querySelector('.quiz-fb');
+            fb.textContent=(ok?'✅ Helyes! ':'❌ Nem egészen. ')+d.e;
+
+            const n=document.createElement('button');
+            n.className='quiz-next';
+            n.textContent=idx+1<QZ.length?'Következő →':'Eredmény';
+            n.onclick=()=>{
+              idx++;
+              show();
+            };
+            fb.after(n);
+          };
         });
       }
+
       show();
     })();
   </script>
 
   <script>
     (function(){
-      const root=document.documentElement, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const bar=document.querySelector('.progress'), pcs=[...document.querySelectorAll('.grid .card')];
+      const root=document.documentElement;
+      const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const bar=document.querySelector('.progress');
+      const pcs=[...document.querySelectorAll('.grid .card')];
       let tick=false;
+
       function frame(){
-        tick=false;const y=scrollY,max=root.scrollHeight-innerHeight;
+        tick=false;
+        const y=scrollY,max=root.scrollHeight-innerHeight;
         bar.style.setProperty('--p',max>0?(y/max).toFixed(4):0);
+
         if(reduced)return;
+
         root.style.setProperty('--sy',Math.min(y,900));
-        pcs.forEach((c,i)=>{const r=c.getBoundingClientRect();
+
+        pcs.forEach((c,i)=>{
+          const r=c.getBoundingClientRect();
           const d=Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight));
-          c.style.setProperty('--py',(d*26*(i%2?-1:1)).toFixed(1)+'px');});
-      }
-      addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(frame);}},{passive:true});
-      addEventListener('resize',frame);frame();
-      if(!reduced&&'IntersectionObserver' in window){
-        const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
-        document.querySelectorAll('.section-head,.card,.stat,.panel,.tips,.question,.quiz,.game,.cta,.split>div:first-child').forEach(el=>{
-          const i=[...el.parentElement.children].indexOf(el);
-          el.style.setProperty('--d',(Math.min(i,5)*.09)+'s');el.classList.add('reveal');io.observe(el);});
+          c.style.setProperty('--py',(d*26*(i%2?-1:1)).toFixed(1)+'px');
+        });
       }
 
-      /* ---- Szemétszedős játék ---- */
-      const cv=document.getElementById('gc'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-      const TR=['🥤','📰','🍾','🔋','📱','🛍️','🥫','🧃'],GOOD=['🌸','🐦','🌳','🦋'];
-      const elT=document.getElementById('g-time'),elS=document.getElementById('g-score'),elB=document.getElementById('g-best'),btn=document.getElementById('g-start');
-      let best=0;try{best=+localStorage.getItem('best')||0;}catch(e){}elB.textContent=best;
+      addEventListener('scroll',()=>{
+        if(!tick){
+          tick=true;
+          requestAnimationFrame(frame);
+        }
+      },{passive:true});
+
+      addEventListener('resize',frame);
+      frame();
+
+      if(!reduced&&'IntersectionObserver' in window){
+        const io=new IntersectionObserver(es=>{
+          es.forEach(e=>{
+            if(e.isIntersecting){
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },{threshold:.12});
+
+        document.querySelectorAll('.section-head,.card,.stat,.panel,.tips,.question,.quiz,.game,.cta,.split>div:first-child').forEach(el=>{
+          const i=[...el.parentElement.children].indexOf(el);
+          el.style.setProperty('--d',(Math.min(i,5)*.09)+'s');
+          el.classList.add('reveal');
+          io.observe(el);
+        });
+      }
+
+      /* Szemétszedős játék */
+      const cv=document.getElementById('gc');
+      const ctx=cv.getContext('2d');
+      const W=cv.width,H=cv.height;
+      const TR=['🥤','📰','🍾','🔋','📱','🛍️','🥫','🧃'];
+      const GOOD=['🌸','🐦','🌳','🦋'];
+
+      const elT=document.getElementById('g-time');
+      const elS=document.getElementById('g-score');
+      const elB=document.getElementById('g-best');
+      const btn=document.getElementById('g-start');
+
+      let best=0;
+      try{best=+localStorage.getItem('best')||0;}catch(e){}
+      elB.textContent=best;
+
       let st,run=false,last=0,keys={};
-      function reset(){st={x:W/2,items:[],score:0,t:40,sp:0,msg:'',mt:0,shake:0};}
-      function drawEm(e,x,y,sz){ctx.font=sz+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(e,x,y);}
+
+      function reset(){
+        st={x:W/2,items:[],score:0,t:40,sp:0,msg:'',mt:0,shake:0};
+      }
+
+      function drawEm(e,x,y,sz){
+        ctx.font=sz+'px serif';
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        ctx.fillText(e,x,y);
+      }
+
       function draw(){
-        const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#bfe8f2');g.addColorStop(.7,'#d9f3d2');g.addColorStop(1,'#8cc98f');
-        ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-        ctx.fillStyle='#7c5a3a';ctx.fillRect(0,H-26,W,26);ctx.fillStyle='#4f9a5c';ctx.fillRect(0,H-32,W,8);
-        drawEm('☁️',110,60,44);drawEm('☁️',470,40,36);drawEm('🌳',40,H-62,46);drawEm('🌳',W-40,H-62,46);
-        if(!st){drawEm('🗑️',W/2,H-62,56);ctx.fillStyle='#17432f';ctx.font='700 22px sans-serif';ctx.fillText('Nyomd meg a Start gombot!',W/2,H/2);return;}
+        const g=ctx.createLinearGradient(0,0,0,H);
+        g.addColorStop(0,'#bfe8f2');
+        g.addColorStop(.7,'#d9f3d2');
+        g.addColorStop(1,'#8cc98f');
+        ctx.fillStyle=g;
+        ctx.fillRect(0,0,W,H);
+
+        ctx.fillStyle='#7c5a3a';
+        ctx.fillRect(0,H-26,W,26);
+        ctx.fillStyle='#4f9a5c';
+        ctx.fillRect(0,H-32,W,8);
+
+        drawEm('☁️',110,60,44);
+        drawEm('☁️',470,40,36);
+        drawEm('🌳',40,H-62,46);
+        drawEm('🌳',W-40,H-62,46);
+
+        if(!st){
+          drawEm('🗑️',W/2,H-62,56);
+          ctx.fillStyle='#17432f';
+          ctx.font='700 22px sans-serif';
+          ctx.fillText('Nyomd meg a Start gombot!',W/2,H/2);
+          return;
+        }
+
         st.items.forEach(i=>drawEm(i.e,i.x,i.y,i.bad?36:34));
+
         const sh=st.shake>0?(Math.random()-.5)*8:0;
         drawEm('🗑️',st.x+sh,H-62,58);
-        if(st.mt>0){ctx.fillStyle=st.msg[0]==='+'?'#1c7a45':'#b3402c';ctx.font='800 26px sans-serif';ctx.fillText(st.msg,st.x,H-120);}
+
+        if(st.mt>0){
+          ctx.fillStyle=st.msg[0]==='+'?'#1c7a45':'#b3402c';
+          ctx.font='800 26px sans-serif';
+          ctx.fillText(st.msg,st.x,H-120);
+        }
       }
+
       function update(dt){
-        const sp=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0);st.x=Math.max(35,Math.min(W-35,st.x+sp*460*dt));
-        st.t-=dt;st.sp-=dt;st.mt-=dt;st.shake-=dt;
-        if(st.sp<=0){st.sp=Math.max(.32,.75-(40-st.t)*.011);const bad=Math.random()<.22;
-          st.items.push({x:30+Math.random()*(W-60),y:-20,v:150+Math.random()*90+(40-st.t)*3.5,bad,e:(bad?GOOD:TR)[Math.floor(Math.random()*(bad?GOOD.length:TR.length))]});}
-        st.items=st.items.filter(i=>{i.y+=i.v*dt;
-          if(i.y>H-95&&i.y<H-40&&Math.abs(i.x-st.x)<44){if(i.bad){st.score=Math.max(0,st.score-2);st.msg='−2';st.shake=.3;}else{st.score++;st.msg='+1';}st.mt=.5;return false;}
-          return i.y<H;});
-        elT.textContent=Math.max(0,Math.ceil(st.t));elS.textContent=st.score;
+        const sp=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0);
+        st.x=Math.max(35,Math.min(W-35,st.x+sp*460*dt));
+
+        st.t-=dt;
+        st.sp-=dt;
+        st.mt-=dt;
+        st.shake-=dt;
+
+        if(st.sp<=0){
+          st.sp=Math.max(.32,.75-(40-st.t)*.011);
+          const bad=Math.random()<.22;
+
+          st.items.push({
+            x:30+Math.random()*(W-60),
+            y:-20,
+            v:150+Math.random()*90+(40-st.t)*3.5,
+            bad,
+            e:(bad?GOOD:TR)[Math.floor(Math.random()*(bad?GOOD.length:TR.length))]
+          });
+        }
+
+        st.items=st.items.filter(i=>{
+          i.y+=i.v*dt;
+
+          if(i.y>H-95&&i.y<H-40&&Math.abs(i.x-st.x)<44){
+            if(i.bad){
+              st.score=Math.max(0,st.score-2);
+              st.msg='−2';
+              st.shake=.3;
+            }else{
+              st.score++;
+              st.msg='+1';
+            }
+            st.mt=.5;
+            return false;
+          }
+
+          return i.y<H;
+        });
+
+        elT.textContent=Math.max(0,Math.ceil(st.t));
+        elS.textContent=st.score;
+
         if(st.t<=0)end();
       }
-      function loop(ts){if(!run)return;const dt=Math.min(.05,(ts-last)/1000);last=ts;update(dt);draw();if(run)requestAnimationFrame(loop);}
-      function end(){run=false;cv.classList.remove('playing');
-        if(st.score>best){best=st.score;elB.textContent=best;try{localStorage.setItem('best',best);}catch(e){}}
-        draw();ctx.fillStyle='rgba(16,62,46,.82)';ctx.fillRect(0,H/2-70,W,140);ctx.fillStyle='#fff';ctx.textAlign='center';
-        ctx.font='800 30px sans-serif';ctx.fillText('Vége! Pontszámod: '+st.score,W/2,H/2-18);
-        ctx.font='600 17px sans-serif';ctx.fillText(st.score>=25?'Szuper, igazi környezetvédő vagy! 🌍':'Próbáld újra, menni fog! ♻️',W/2,H/2+24);
-        btn.textContent='↻ Újra';}
-      function start(){reset();run=true;last=performance.now();cv.classList.add('playing');btn.textContent='↻ Újraindítás';cv.focus({preventScroll:true});requestAnimationFrame(loop);}
+
+      function loop(ts){
+        if(!run)return;
+        const dt=Math.min(.05,(ts-last)/1000);
+        last=ts;
+        update(dt);
+        draw();
+        if(run)requestAnimationFrame(loop);
+      }
+
+      function end(){
+        run=false;
+        cv.classList.remove('playing');
+
+        if(st.score>best){
+          best=st.score;
+          elB.textContent=best;
+          try{localStorage.setItem('best',best);}catch(e){}
+        }
+
+        draw();
+        ctx.fillStyle='rgba(16,62,46,.82)';
+        ctx.fillRect(0,H/2-70,W,140);
+        ctx.fillStyle='#fff';
+        ctx.textAlign='center';
+        ctx.font='800 30px sans-serif';
+        ctx.fillText('Vége! Pontszámod: '+st.score,W/2,H/2-18);
+        ctx.font='600 17px sans-serif';
+        ctx.fillText(st.score>=25?'Szuper, igazi környezetvédő vagy! 🌍':'Próbáld újra, menni fog! ♻️',W/2,H/2+24);
+        btn.textContent='↻ Újra';
+      }
+
+      function start(){
+        reset();
+        run=true;
+        last=performance.now();
+        cv.classList.add('playing');
+        btn.textContent='↻ Újraindítás';
+        cv.focus({preventScroll:true});
+        requestAnimationFrame(loop);
+      }
+
       btn.addEventListener('click',start);
-      cv.addEventListener('pointermove',e=>{if(!st||!run)return;const r=cv.getBoundingClientRect();st.x=Math.max(35,Math.min(W-35,(e.clientX-r.left)*W/r.width));});
-      cv.addEventListener('pointerdown',e=>{if(st&&run){const r=cv.getBoundingClientRect();st.x=Math.max(35,Math.min(W-35,(e.clientX-r.left)*W/r.width));}});
-      addEventListener('keydown',e=>{if(run&&['ArrowLeft','ArrowRight'].includes(e.key)){keys[e.key]=true;e.preventDefault();}});
-      addEventListener('keyup',e=>{keys[e.key]=false;});
+
+      cv.addEventListener('pointermove',e=>{
+        if(!st||!run)return;
+        const r=cv.getBoundingClientRect();
+        st.x=Math.max(35,Math.min(W-35,(e.clientX-r.left)*W/r.width));
+      });
+
+      cv.addEventListener('pointerdown',e=>{
+        if(st&&run){
+          const r=cv.getBoundingClientRect();
+          st.x=Math.max(35,Math.min(W-35,(e.clientX-r.left)*W/r.width));
+        }
+      });
+
+      addEventListener('keydown',e=>{
+        if(run&&['ArrowLeft','ArrowRight'].includes(e.key)){
+          keys[e.key]=true;
+          e.preventDefault();
+        }
+      });
+
+      addEventListener('keyup',e=>{
+        keys[e.key]=false;
+      });
+
       draw();
     })();
   </script>
 
   <script>
     (function(){
-      const fab=document.getElementById('chat-fab'),box=document.getElementById('chat'),log=document.getElementById('chat-log'),
-            form=document.getElementById('chat-form'),inp=document.getElementById('chat-in'),chips=document.getElementById('chat-chips');
+      const fab=document.getElementById('chat-fab');
+      const box=document.getElementById('chat');
+      const log=document.getElementById('chat-log');
+      const form=document.getElementById('chat-form');
+      const inp=document.getElementById('chat-in');
+      const chips=document.getElementById('chat-chips');
+
       const norm=t=>t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+
       const KB=[
-        {k:['papirmentes','papir','nyomtat','szkenn','iroda'],a:'Papírmentes irodához: online dokumentumok és űrlapok, felhős tárhely, közös szerkesztés, digitális aláírás. A régi papírokat beszkennelheted, nyomtatni pedig csak akkor érdemes, ha tényleg muszáj – és akkor is kétoldalasan.',go:['#papirmentes','Papírmentes iroda rész']},
-        {k:['energia','aram','standby','kikapcs','fogyaszt','takarek'],a:'Energiát spórolhatsz, ha kikapcsolod a nem használt eszközöket (a készenléti állapot is fogyaszt), energiatakarékos üzemmódot használsz, és az eszközök töltőjét nem hagyod feleslegesen a konnektorban.',go:['#fenntarthato-it','Fenntartható IT rész']},
-        {k:['telefon','akkumulator','elem','elektronikai','szamitogep','laptop','regi eszkoz','e-hulladek'],a:'A régi telefont, akkumulátort és számítógépet ne dobd a kukába! Add le elektronikai hulladékgyűjtő helyen (hulladékudvar), vagy vidd vissza a boltba. Az akkumulátor veszélyes anyagokat tartalmaz, ezért külön kell gyűjteni. Előtte töröld róla a személyes adataidat.'},
-        {k:['szelektiv','kuka','ujrahasznosit','muanyag','uveg','szemet','hulladek'],a:'Magyarországon jellemzően: kék gyűjtő – papír, sárga – műanyag és fém, zöld – üveg. A szennyezett dolgokat (pl. zsíros papír) nem érdemes bele tenni. A helyi szabályok kicsit eltérhetnek, ezért nézd meg a lakóhelyed hulladékszolgáltatójának tájékoztatóját.',go:['#alkalmazasok','Okos appok']},
-        {k:['kozleked','bicikli','kerekpar','busz','tomegkozleked','gyalog','utazas','bkk','auto'],a:'Rövid távon a gyaloglás és a kerékpár a legkörnyezetbarátabb, hosszabb távon a tömegközlekedés. Útvonaltervezőkkel (pl. BKK Futár, Google Térkép, Moovit) össze tudod hasonlítani a lehetőségeket.',go:['#alkalmazasok','Okos appok']},
-        {k:['app','alkalmazas','letolt','google play','app store'],a:'Az „Okos appok” résznél három kategóriára kattintva példaalkalmazásokat találsz letöltési linkekkel, és megnézheted, hogyan működnek.',go:['#alkalmazasok','Ugrás az appokhoz']},
-        {k:['rendezveny','buli','zold rendezveny','esemeny','iskolai nap'],a:'Zöld rendezvényhez: digitális meghívó és jegy, jó tömegközlekedési megközelíthetőség, többször használható edények, helyi alapanyagok és jól jelölt szelektív gyűjtők.',go:['#kerdesek','Kutatási kérdések']},
-        {k:['labnyom','okologiai','karbon','co2','szen-dioxid','uveghaz','klima'],a:'Az ökológiai lábnyom azt mutatja meg, mennyire terheljük a környezetet életmódunkkal. Csökkentheted: kevesebb energia és papír, tudatos vásárlás, közösségi közlekedés, kevesebb pazarlás.'},
-        {k:['digitalis','email','e-mail','streaming','felho','adatkozpont','video'],a:'A digitális világnak is van környezeti hatása: az adatközpontok energiát fogyasztanak. Segít: töröld a felesleges fájlokat és e-maileket, ne tölts fölöslegesen nagy felbontásban videót, és használd hosszabb ideig az eszközeidet.'},
-        {k:['elettartam','javit','uj telefon','csere','hosszabb','szerviz'],a:'A leginkább környezetbarát eszköz az, amit már megvettél. Védd tokkal, javíttasd meg, cseréld az akkumulátort, és csak akkor vegyél újat, ha tényleg szükséges. A még működő régit add tovább vagy adj el.',go:['#fenntarthato-it','Fenntartható IT rész']},
-        {k:['viz','csap','zuhany','locsol'],a:'Vízspórolás: rövidebb zuhany, csöpögő csapok megjavítása, mosogatás és mosás teli géppel. Okos vízmérőkkel és appokkal nyomon követheted a fogyasztást.',go:['#alkalmazasok','Okos appok']},
-        {k:['etel','elelmiszer','pazarl','too good','olio','kompost'],a:'Az ételpazarlás csökkentéséhez tervezz bevásárlólistát, használd fel a maradékot, és próbáld ki a Too Good To Go vagy OLIO alkalmazásokat. A szerves hulladékot komposztálhatod.'},
-        {k:['kviz','teszt','jatek','minijatek'],a:'A „Kutatás” résznél van egy kvíz, a „Játék” résznél pedig egy szemétszedős minijáték – próbáld ki mindkettőt!',go:['#jatek','Ugrás a játékhoz']},
-        {k:['sotet','dark','mod'],a:'A menüsor jobb szélén lévő gombbal válthatsz világos és sötét mód között.'},
-        {k:['szia','hello','udv','jo napot','hali'],a:'Szia! 👋 Én vagyok a Zöld Segítő. Kérdezhetsz a papírmentes irodáról, hulladékokról, energiatakarékosságról vagy az oldal tartalmáról.'},
-        {k:['kosz','koszi','szuper','rendben'],a:'Szívesen! 🌱 Ha van még kérdésed, nyugodtan írj.'},
-        {k:['ki vagy','mi vagy','segit','mit tudsz','tudsz'],a:'Egy egyszerű segítő robot vagyok ezen az oldalon. A környezetvédelemről, fenntartható IT-ról, hulladékkezelésről, közlekedésről és az oldal részeiről tudok válaszolni. Kérj egy „tippet” is!'}
+        {
+          k:['papirmentes','papir','nyomtat','szkenn','iroda'],
+          a:'Papírmentes irodához: online dokumentumok és űrlapok, felhős tárhely, közös szerkesztés, digitális aláírás. A régi papírokat beszkennelheted, nyomtatni pedig csak akkor érdemes, ha tényleg muszáj – és akkor is kétoldalasan.',
+          go:['#papirmentes','Papírmentes iroda rész']
+        },
+        {
+          k:['energia','aram','standby','kikapcs','fogyaszt','takarek'],
+          a:'Energiát spórolhatsz, ha kikapcsolod a nem használt eszközöket (a készenléti állapot is fogyaszt), energiatakarékos üzemmódot használsz, és az eszközök töltőjét nem hagyod feleslegesen a konnektorban.',
+          go:['#fenntarthato-it','Fenntartható IT rész']
+        },
+        {
+          k:['telefon','akkumulator','elem','elektronikai','szamitogep','laptop','regi eszkoz','e-hulladek'],
+          a:'A régi telefont, akkumulátort és számítógépet ne dobd a kukába! Add le elektronikai hulladékgyűjtő helyen (hulladékudvar), vagy vidd vissza a boltba. Az akkumulátor veszélyes anyagokat tartalmaz, ezért külön kell gyűjteni. Előtte töröld róla a személyes adataidat.'
+        },
+        {
+          k:['szelektiv','kuka','ujrahasznosit','muanyag','uveg','szemet','hulladek'],
+          a:'Magyarországon jellemzően: kék gyűjtő – papír, sárga – műanyag és fém, zöld – üveg. A szennyezett dolgokat (pl. zsíros papír) nem érdemes bele tenni. A helyi szabályok kicsit eltérhetnek, ezért nézd meg a lakóhelyed hulladékszolgáltatójának tájékoztatóját.',
+          go:['#alkalmazasok','Okos appok']
+        },
+        {
+          k:['kozleked','bicikli','kerekpar','busz','tomegkozleked','gyalog','utazas','bkk','auto'],
+          a:'Rövid távon a gyaloglás és a kerékpár a legkörnyezetbarátabb, hosszabb távon a tömegközlekedés. Útvonaltervezőkkel (pl. BKK Futár, Google Térkép, Moovit) össze tudod hasonlítani a lehetőségeket.',
+          go:['#alkalmazasok','Okos appok']
+        },
+        {
+          k:['app','alkalmazas','letolt','google play','app store'],
+          a:'Az „Okos appok” résznél három kategóriára kattintva példaalkalmazásokat találsz letöltési linkekkel, és megnézheted, hogyan működnek.',
+          go:['#alkalmazasok','Ugrás az appokhoz']
+        },
+        {
+          k:['rendezveny','buli','zold rendezveny','esemeny','iskolai nap'],
+          a:'Zöld rendezvényhez: digitális meghívó és jegy, jó tömegközlekedési megközelíthetőség, többször használható edények, helyi alapanyagok és jól jelölt szelektív gyűjtők.',
+          go:['#kerdesek','Kutatási kérdések']
+        },
+        {
+          k:['labnyom','okologiai','karbon','co2','szen-dioxid','uveghaz','klima'],
+          a:'Az ökológiai lábnyom azt mutatja meg, mennyire terheljük a környezetet életmódunkkal. Csökkentheted: kevesebb energia és papír, tudatos vásárlás, közösségi közlekedés, kevesebb pazarlás.'
+        },
+        {
+          k:['digitalis','email','e-mail','streaming','felho','adatkozpont','video'],
+          a:'A digitális világnak is van környezeti hatása: az adatközpontok energiát fogyasztanak. Segít: töröld a felesleges fájlokat és e-maileket, ne tölts fölöslegesen nagy felbontásban videót, és használd hosszabb ideig az eszközeidet.'
+        },
+        {
+          k:['elettartam','javit','uj telefon','csere','hosszabb','szerviz'],
+          a:'A leginkább környezetbarát eszköz az, amit már megvettél. Védd tokkal, javíttasd meg, cseréld az akkumulátort, és csak akkor vegyél újat, ha tényleg szükséges. A még működő régit add tovább vagy adj el.',
+          go:['#fenntarthato-it','Fenntartható IT rész']
+        },
+        {
+          k:['viz','csap','zuhany','locsol'],
+          a:'Vízspórolás: rövidebb zuhany, csöpögő csapok megjavítása, mosogatás és mosás teli géppel. Okos vízmérőkkel és appokkal nyomon követheted a fogyasztást.',
+          go:['#alkalmazasok','Okos appok']
+        },
+        {
+          k:['etel','elelmiszer','pazarl','too good','olio','kompost'],
+          a:'Az ételpazarlás csökkentéséhez tervezz bevásárlólistát, használd fel a maradékot, és próbáld ki a Too Good To Go vagy OLIO alkalmazásokat. A szerves hulladékot komposztálhatod.'
+        },
+        {
+          k:['kviz','teszt','jatek','minijatek'],
+          a:'A „Kutatás” résznél van egy kvíz, a „Játék” résznél pedig egy szemétszedős minijáték – próbáld ki mindkettőt!',
+          go:['#jatek','Ugrás a játékhoz']
+        },
+        {
+          k:['sotet','dark','mod'],
+          a:'A menüsor jobb szélén lévő gombbal válthatsz világos és sötét mód között.'
+        },
+        {
+          k:['szia','hello','udv','jo napot','hali'],
+          a:'Szia! 👋 Én vagyok a Zöld Segítő. Kérdezhetsz a papírmentes irodáról, hulladékokról, energiatakarékosságról vagy az oldal tartalmáról.'
+        },
+        {
+          k:['kosz','koszi','szuper','rendben'],
+          a:'Szívesen! 🌱 Ha van még kérdésed, nyugodtan írj.'
+        },
+        {
+          k:['ki vagy','mi vagy','segit','mit tudsz','tudsz'],
+          a:'Egy egyszerű segítő robot vagyok ezen az oldalon. A környezetvédelemről, fenntartható IT-ról, hulladékkezelésről, közlekedésről és az oldal részeiről tudok válaszolni. Kérj egy „tippet” is!'
+        }
       ];
-      const TIPS=['Nyomtatás előtt gondold át, tényleg kell-e a papír.','Húzd ki a töltőt, ha nem használod.','Vigyél magaddal saját kulacsot és szatyrot.','Rövid utakra a gyaloglás vagy a bicikli a legjobb.','Töröld a felesleges fájlokat és e-maileket a tárhelyedről.','Javítsd meg a régi eszközt, mielőtt újat vennél.','Az elemeket és akkumulátorokat külön gyűjtőbe tedd.'];
+
+      const TIPS=[
+        'Nyomtatás előtt gondold át, tényleg kell-e a papír.',
+        'Húzd ki a töltőt, ha nem használod.',
+        'Vigyél magaddal saját kulacsot és szatyrot.',
+        'Rövid utakra a gyaloglás vagy a bicikli a legjobb.',
+        'Töröld a felesleges fájlokat és e-maileket a tárhelyedről.',
+        'Javítsd meg a régi eszközt, mielőtt újat vennél.',
+        'Az elemeket és akkumulátorokat külön gyűjtőbe tedd.'
+      ];
+
       let started=false,ti=0;
+
       function add(txt,who,go){
-        const d=document.createElement('div');d.className='msg '+who;d.textContent=txt;
-        if(go){const a=document.createElement('a');a.className='jump';a.href=go[0];a.textContent='→ '+go[1];a.addEventListener('click',()=>{if(innerWidth<760)close();});d.append(document.createElement('br'),a);}
-        log.append(d);log.scrollTop=log.scrollHeight;return d;
+        const d=document.createElement('div');
+        d.className='msg '+who;
+        d.textContent=txt;
+
+        if(go){
+          const a=document.createElement('a');
+          a.className='jump';
+          a.href=go[0];
+          a.textContent='→ '+go[1];
+          a.addEventListener('click',()=>{
+            if(innerWidth<760)close();
+          });
+          d.append(document.createElement('br'),a);
+        }
+
+        log.append(d);
+        log.scrollTop=log.scrollHeight;
+        return d;
       }
+
       function answer(q){
         const n=norm(q);
-        if(/tipp|javaslat|otlet/.test(n)){return {a:'💡 Tipp: '+TIPS[ti++%TIPS.length]+'\nKérj még egyet, ha szeretnél!'};}
+
+        if(/tipp|javaslat|otlet/.test(n)){
+          return {a:'💡 Tipp: '+TIPS[ti++%TIPS.length]+'\nKérj még egyet, ha szeretnél!'};
+        }
+
         let best=null,bs=0;
-        KB.forEach(e=>{const sc=e.k.reduce((t,w)=>t+(n.includes(w)?1:0),0);if(sc>bs){bs=sc;best=e;}});
-        return best?best:{a:'Erre nem tudok biztos választ adni. 🤔 Próbáld meg másképp megfogalmazni, vagy kérdezz például a papírmentes irodáról, szelektív gyűjtésről, régi eszközökről vagy energiatakarékosságról. Kérhetsz „tippet” is.'};
+
+        KB.forEach(e=>{
+          const sc=e.k.reduce((t,w)=>t+(n.includes(w)?1:0),0);
+          if(sc>bs){
+            bs=sc;
+            best=e;
+          }
+        });
+
+        return best?best:{
+          a:'Erre nem tudok biztos választ adni. 🤔 Próbáld meg másképp megfogalmazni, vagy kérdezz például a papírmentes irodáról, szelektív gyűjtésről, régi eszközökről vagy energiatakarékosságról. Kérhetsz „tippet” is.'
+        };
       }
+
       /* Cloudflare Worker AI-végpont */
       const AI_ENDPOINT='https://zoldnap-9c.peter-pirnyak.workers.dev/';
-      const hist=[];let busy=false;
+
+      const hist=[];
+      let busy=false;
+
       async function send(q){
         q=q.trim();
+
         if(!q||busy)return;
+
         busy=true;
         add(q,'me');
         inp.value='';
+
         hist.push({role:'user',content:q});
+
         const t=add('•••','bot');
         t.classList.add('typing');
 
-        let reply=null,go=null;
+        let reply=null;
+        let go=null;
         let reason='ismeretlen hiba';
+        let aiSuccess=false;
 
         try{
           if(AI_ENDPOINT){
             const ctl=new AbortController();
             const timeout=setTimeout(()=>ctl.abort(),20000);
+
             try{
               const res=await fetch(AI_ENDPOINT,{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({messages:hist.slice(-10)}),
+                body:JSON.stringify({
+                  messages:hist.slice(-10)
+                }),
                 signal:ctl.signal
               });
+
+              /* A válasz törzsének beolvasása akkor is,
+                 ha a szerver hibakódot küld. */
+              const data=await res.json().catch(()=>({}));
+
               if(!res.ok){
                 reason='HTTP '+res.status;
-              }else{
-                const data=await res.json();
-                if(data&&typeof data.reply==='string'&&data.reply.trim()){
-                  reply=data.reply.trim();
-                }else{
-                  reason='üres vagy hibás AI-válasz';
+
+                if(data.details){
+                  reason+=': '+data.details;
+                }else if(data.error){
+                  reason+=': '+data.error;
                 }
+
+                console.error('Cloudflare AI hiba:',{
+                  status:res.status,
+                  statusText:res.statusText,
+                  response:data
+                });
+
+              }else if(data&&typeof data.reply==='string'&&data.reply.trim()){
+                reply=data.reply.trim();
+                aiSuccess=true;
+
+              }else{
+                reason='üres vagy hibás AI-válasz';
+                console.error('Hibás AI-válasz:',data);
               }
+
             }finally{
               clearTimeout(timeout);
             }
+
           }else{
             reason='nincs beállítva az AI-végpont';
           }
+
         }catch(e){
-          reason=e.name==='AbortError'?'időtúllépés (20 másodperc)':'hálózati vagy CORS-hiba';
+          reason=e.name==='AbortError'
+            ?'időtúllépés (20 másodperc)'
+            :'hálózati vagy CORS-hiba';
+
           console.error('Zöld Segítő AI-hiba:',e);
         }
 
+        let historyReply='';
+
         if(reply===null){
           await new Promise(r=>setTimeout(r,350));
+
           const local=answer(q);
-          reply='📚 Beépített válasz (az AI most nem érhető el: '+reason+')\n\n'+local.a;
+          historyReply=local.a;
           go=local.go;
+
+          reply='📚 Beépített válasz (az AI most nem érhető el: '+reason+')\n\n'+local.a;
+
         }else{
+          historyReply=reply;
           reply='🤖 Cloudflare AI válasza\n\n'+reply;
         }
 
         t.remove();
         add(reply,'bot',go);
-        hist.push({role:'assistant',content:reply});
+
+        /* Csak a valódi válasz kerül az előzményekbe,
+           a technikai hibajelzések nem. */
+        hist.push({
+          role:'assistant',
+          content:historyReply
+        });
+
+        /* Az előzmények méretének korlátozása. */
+        if(hist.length>20){
+          hist.splice(0,hist.length-20);
+        }
+
         busy=false;
       }
+
       function open(){
-        box.hidden=false;fab.setAttribute('aria-expanded','true');
-        if(!started){started=true;add('Szia! 👋 Én vagyok a Zöld Segítő. Segítek a környezetvédelemmel és az oldal témáival kapcsolatos kérdésekben. Mit szeretnél tudni?','bot');
-          ['Papírmentes iroda','Mit tegyek a régi telefonommal?','Hogyan szelektáljak?','Energiatakarékosság','Adj egy tippet!'].forEach(t=>{
-            const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;b.onclick=()=>send(t);chips.append(b);});}
+        box.hidden=false;
+        fab.setAttribute('aria-expanded','true');
+
+        if(!started){
+          started=true;
+
+          add(
+            'Szia! 👋 Én vagyok a Zöld Segítő. Segítek a környezetvédelemmel és az oldal témáival kapcsolatos kérdésekben. Mit szeretnél tudni?',
+            'bot'
+          );
+
+          [
+            'Papírmentes iroda',
+            'Mit tegyek a régi telefonommal?',
+            'Hogyan szelektáljak?',
+            'Energiatakarékosság',
+            'Adj egy tippet!'
+          ].forEach(t=>{
+            const b=document.createElement('button');
+            b.type='button';
+            b.className='chip';
+            b.textContent=t;
+            b.onclick=()=>send(t);
+            chips.append(b);
+          });
+        }
+
         inp.focus();
       }
-      function close(){box.hidden=true;fab.setAttribute('aria-expanded','false');fab.focus();}
-      fab.addEventListener('click',()=>box.hidden?open():close());
+
+      function close(){
+        box.hidden=true;
+        fab.setAttribute('aria-expanded','false');
+        fab.focus();
+      }
+
+      fab.addEventListener('click',()=>{
+        box.hidden?open():close();
+      });
+
       document.getElementById('chat-close').addEventListener('click',close);
-      form.addEventListener('submit',e=>{e.preventDefault();send(inp.value);});
-      addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close();});
+
+      form.addEventListener('submit',e=>{
+        e.preventDefault();
+        send(inp.value);
+      });
+
+      addEventListener('keydown',e=>{
+        if(e.key==='Escape'&&!box.hidden)close();
+      });
     })();
   </script>
 </body>
