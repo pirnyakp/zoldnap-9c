@@ -608,7 +608,7 @@
         return best?best:{a:'Erre nem tudok biztos választ adni. 🤔 Próbáld meg másképp megfogalmazni, vagy kérdezz például a papírmentes irodáról, szelektív gyűjtésről, régi eszközökről vagy energiatakarékosságról. Kérhetsz „tippet” is.'};
       }
       /* AI-bekötés: ide kerül a saját proxy címed (lásd ai-proxy-worker.js). Ha üres, a beépített válaszok működnek. */
-      const AI_ENDPOINT='';
+      const AI_ENDPOINT='https://zoldnap-9c.peter-pirnyak.workers.dev/';
       const hist=[];let busy=false;
       async function send(q){
         q=q.trim();if(!q||busy)return;busy=true;add(q,'me');inp.value='';
