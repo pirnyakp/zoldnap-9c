@@ -607,24 +607,67 @@
         KB.forEach(e=>{const sc=e.k.reduce((t,w)=>t+(n.includes(w)?1:0),0);if(sc>bs){bs=sc;best=e;}});
         return best?best:{a:'Erre nem tudok biztos választ adni. 🤔 Próbáld meg másképp megfogalmazni, vagy kérdezz például a papírmentes irodáról, szelektív gyűjtésről, régi eszközökről vagy energiatakarékosságról. Kérhetsz „tippet” is.'};
       }
-      /* AI-bekötés: ide kerül a saját proxy címed (lásd ai-proxy-worker.js). Ha üres, a beépített válaszok működnek. */
+      /* Cloudflare Worker AI-végpont */
       const AI_ENDPOINT='https://zoldnap-9c.peter-pirnyak.workers.dev/';
       const hist=[];let busy=false;
       async function send(q){
-        q=q.trim();if(!q||busy)return;busy=true;add(q,'me');inp.value='';
+        q=q.trim();
+        if(!q||busy)return;
+        busy=true;
+        add(q,'me');
+        inp.value='';
         hist.push({role:'user',content:q});
-        const t=add('•••','bot');t.classList.add('typing');
-        let text=null,go=null;
-        if(AI_ENDPOINT){
-          try{
-            const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),20000);
-            const res=await fetch(AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist.slice(-10)}),signal:ctl.signal});
-            clearTimeout(to);
-            if(res.ok){const d=await res.json();if(d&&typeof d.reply==='string'&&d.reply.trim())text=d.reply.trim();}
-          }catch(e){}
+        const t=add('•••','bot');
+        t.classList.add('typing');
+
+        let reply=null,go=null;
+        let reason='ismeretlen hiba';
+
+        try{
+          if(AI_ENDPOINT){
+            const ctl=new AbortController();
+            const timeout=setTimeout(()=>ctl.abort(),20000);
+            try{
+              const res=await fetch(AI_ENDPOINT,{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({messages:hist.slice(-10)}),
+                signal:ctl.signal
+              });
+              if(!res.ok){
+                reason='HTTP '+res.status;
+              }else{
+                const data=await res.json();
+                if(data&&typeof data.reply==='string'&&data.reply.trim()){
+                  reply=data.reply.trim();
+                }else{
+                  reason='üres vagy hibás AI-válasz';
+                }
+              }
+            }finally{
+              clearTimeout(timeout);
+            }
+          }else{
+            reason='nincs beállítva az AI-végpont';
+          }
+        }catch(e){
+          reason=e.name==='AbortError'?'időtúllépés (20 másodperc)':'hálózati vagy CORS-hiba';
+          console.error('Zöld Segítő AI-hiba:',e);
         }
-        if(text===null){await new Promise(r=>setTimeout(r,500));const r=answer(q);text=r.a;go=r.go;}
-        t.remove();add(text,'bot',go);hist.push({role:'assistant',content:text});busy=false;
+
+        if(reply===null){
+          await new Promise(r=>setTimeout(r,350));
+          const local=answer(q);
+          reply='📚 Beépített válasz (az AI most nem érhető el: '+reason+')\n\n'+local.a;
+          go=local.go;
+        }else{
+          reply='🤖 Cloudflare AI válasza\n\n'+reply;
+        }
+
+        t.remove();
+        add(reply,'bot',go);
+        hist.push({role:'assistant',content:reply});
+        busy=false;
       }
       function open(){
         box.hidden=false;fab.setAttribute('aria-expanded','true');
