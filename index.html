@@ -338,6 +338,16 @@
     .lb[hidden] { display:none; }
     .lb img { max-width:100%; max-height:100%; object-fit:contain; border-radius:12px; }
     @media (max-width:760px) { .pics { grid-template-columns:repeat(2,1fr); } }
+
+    /* ---- játék nagyítása ---- */
+    .quiz-next.alt { background:transparent; color:var(--green-dark); border:1.5px solid var(--green); }
+    body.noscroll { overflow:hidden; }
+    .game.big { position:fixed; inset:0; z-index:90; margin:0; border-radius:0; border:0; overflow:auto; display:flex; flex-direction:column; justify-content:center; padding:calc(12px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left)); background:var(--bg-big,#f4faf5); animation:none; }
+    [data-theme="dark"] .game.big { --bg-big:#10201a; }
+    .game.big #gc { width:min(100%, calc((100vh - 150px) * 1.6)); width:min(100%, calc((100dvh - 150px) * 1.6)); margin:0 auto; }
+    .game.big .hud { max-width:960px; width:100%; margin:0 auto 10px; }
+    .game.big .game-note { text-align:center; }
+    @media (max-width:560px) { .game.big .hud .quiz-next { width:auto; flex:1; } }
   </style>
 </head>
 <body>
@@ -509,7 +519,7 @@
         <p class="lead">Mozgasd a kukát egérrel, ujjal vagy a nyilakkal, és kapd el a lehulló szemetet. A virágokra és a madarakra vigyázz, azokat nem szabad elkapni!</p>
       </div>
       <div class="game">
-        <div class="hud"><span>⏱️ Idő: <b id="g-time">40</b> mp</span><span>🗑️ Pont: <b id="g-score">0</b></span><span>🏆 Rekord: <b id="g-best">0</b></span><button class="quiz-next" id="g-start" type="button">▶ Start</button></div>
+        <div class="hud"><span>⏱️ Idő: <b id="g-time">40</b> mp</span><span>🗑️ Pont: <b id="g-score">0</b></span><span>🏆 Rekord: <b id="g-best">0</b></span><button class="quiz-next" id="g-start" type="button">▶ Start</button><button class="quiz-next alt" id="g-big" type="button" aria-pressed="false">⛶ Nagyítás</button></div>
         <canvas id="gc" width="640" height="400" tabindex="0" aria-label="Szemétszedős minijáték"></canvas>
         <p class="game-note">Szemét: +1 pont · virág, madár, fa: −2 pont</p>
       </div>
@@ -687,22 +697,24 @@
       }
 
       /* ---- Szemétszedős játék ---- */
-      const cv=document.getElementById('gc'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+      const cv=document.getElementById('gc'),ctx=cv.getContext('2d'),W=640,H=400;
+      const EMF='"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Twemoji Mozilla",sans-serif';
+      function fit(){const w=Math.round((cv.clientWidth||W)*Math.min(devicePixelRatio||1,3));if(cv.width!==w){cv.width=w;cv.height=Math.round(w*H/W);}ctx.setTransform(cv.width/W,0,0,cv.height/H,0,0);}
       const TR=['🥤','📰','🍾','🔋','📱','🛍️','🥫','🧃'],GOOD=['🌸','🐦','🌳','🦋'];
       const elT=document.getElementById('g-time'),elS=document.getElementById('g-score'),elB=document.getElementById('g-best'),btn=document.getElementById('g-start');
       let best=0;try{best=+localStorage.getItem('best')||0;}catch(e){}elB.textContent=best;
       let st,run=false,last=0,keys={};
       function reset(){st={x:W/2,items:[],score:0,t:40,sp:0,msg:'',mt:0,shake:0};}
-      function drawEm(e,x,y,sz){ctx.font=sz+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(e,x,y);}
+      function drawEm(e,x,y,sz){ctx.font=sz+'px '+EMF;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(e,x,y);}
       function draw(){
         const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#bfe8f2');g.addColorStop(.7,'#d9f3d2');g.addColorStop(1,'#8cc98f');
         ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
         ctx.fillStyle='#7c5a3a';ctx.fillRect(0,H-26,W,26);ctx.fillStyle='#4f9a5c';ctx.fillRect(0,H-32,W,8);
-        drawEm('☁️',110,60,44);drawEm('☁️',470,40,36);drawEm('🌳',40,H-62,46);drawEm('🌳',W-40,H-62,46);
-        if(!st){drawEm('🗑️',W/2,H-62,56);ctx.fillStyle='#17432f';ctx.font='700 22px sans-serif';ctx.fillText('Nyomd meg a Start gombot!',W/2,H/2);return;}
-        st.items.forEach(i=>drawEm(i.e,i.x,i.y,i.bad?36:34));
+        drawEm('☁️',110,60,58);drawEm('☁️',470,40,48);drawEm('🌳',44,H-66,62);drawEm('🌳',W-44,H-66,62);
+        if(!st){drawEm('🗑️',W/2,H-62,76);ctx.fillStyle='#17432f';ctx.font='700 22px sans-serif';ctx.fillText('Nyomd meg a Start gombot!',W/2,H/2);return;}
+        st.items.forEach(i=>drawEm(i.e,i.x,i.y,i.bad?52:48));
         const sh=st.shake>0?(Math.random()-.5)*8:0;
-        drawEm('🗑️',st.x+sh,H-62,58);
+        drawEm('🗑️',st.x+sh,H-62,78);
         if(st.mt>0){ctx.fillStyle=st.msg[0]==='+'?'#1c7a45':'#b3402c';ctx.font='800 26px sans-serif';ctx.fillText(st.msg,st.x,H-120);}
       }
       function update(dt){
@@ -711,7 +723,7 @@
         if(st.sp<=0){st.sp=Math.max(.32,.75-(40-st.t)*.011);const bad=Math.random()<.22;
           st.items.push({x:30+Math.random()*(W-60),y:-20,v:150+Math.random()*90+(40-st.t)*3.5,bad,e:(bad?GOOD:TR)[Math.floor(Math.random()*(bad?GOOD.length:TR.length))]});}
         st.items=st.items.filter(i=>{i.y+=i.v*dt;
-          if(i.y>H-95&&i.y<H-40&&Math.abs(i.x-st.x)<44){if(i.bad){st.score=Math.max(0,st.score-2);st.msg='−2';st.shake=.3;}else{st.score++;st.msg='+1';}st.mt=.5;return false;}
+          if(i.y>H-108&&i.y<H-40&&Math.abs(i.x-st.x)<52){if(i.bad){st.score=Math.max(0,st.score-2);st.msg='−2';st.shake=.3;}else{st.score++;st.msg='+1';}st.mt=.5;return false;}
           return i.y<H;});
         elT.textContent=Math.max(0,Math.ceil(st.t));elS.textContent=st.score;
         if(st.t<=0)end();
@@ -729,7 +741,8 @@
       cv.addEventListener('pointerdown',e=>{if(st&&run){const r=cv.getBoundingClientRect();st.x=Math.max(35,Math.min(W-35,(e.clientX-r.left)*W/r.width));}});
       addEventListener('keydown',e=>{if(run&&['ArrowLeft','ArrowRight'].includes(e.key)){keys[e.key]=true;e.preventDefault();}});
       addEventListener('keyup',e=>{keys[e.key]=false;});
-      draw();
+      addEventListener('resize',()=>{fit();if(!run)draw();});
+      fit();draw();
     })();
   </script>
 
@@ -837,6 +850,23 @@
       });
       lb.addEventListener('click',()=>{lb.hidden=true;});
       addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden)lb.hidden=true;});
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const g=document.querySelector('.game'),bb=document.getElementById('g-big');
+      function setBig(on){
+        g.classList.toggle('big',on);document.body.classList.toggle('noscroll',on);
+        bb.textContent=on?'✕ Kicsinyítés':'⛶ Nagyítás';bb.setAttribute('aria-pressed',on);
+        if(on){if(g.requestFullscreen)g.requestFullscreen().catch(()=>{});}
+        else if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});}
+        setTimeout(()=>dispatchEvent(new Event('resize')),80);
+        if(on)document.getElementById('gc').scrollIntoView({block:'center'});
+      }
+      bb.addEventListener('click',()=>setBig(!g.classList.contains('big')));
+      document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&g.classList.contains('big'))setBig(false);});
+      addEventListener('keydown',e=>{if(e.key==='Escape'&&g.classList.contains('big')&&!document.fullscreenElement)setBig(false);});
     })();
   </script>
 </body>
